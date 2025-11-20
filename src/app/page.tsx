@@ -1,7 +1,7 @@
 "use client";
 
 import { GameCarousel } from "@/components/GameCarousel";
-import { Zap } from "lucide-react";
+import { Zap, Mail, Code2 } from "lucide-react";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
@@ -9,24 +9,33 @@ export default function Home() {
   const games = [
     {
       title: "BORDERLAND",
-      status: "Live Now",
+      status: "Concluded",
+      quarter: "Q4 2025",
+      primaryActivation: "Alice in Russell-Land",
       image: "/images/Borderland.png",
       link: "https://borderland.thebeaconhq.com"
     },
     {
-      title: "SQUID GAME",
-      status: "LOCKED",
-      image: "/images/SquidGame.png"
+      title: "HAIL MARY PROJECT",
+      status: "Sign Up",
+      quarter: "Q1 2026",
+      primaryActivation: "Pier 70",
+      image: "/images/HailMary.png",
+      link: "https://forms.gle/Z5hLqvVyqFHWGZu29"
     },
     {
       title: "SURVIVOR",
       status: "LOCKED",
+      quarter: "Q2 2026",
+      primaryActivation: "TBD",
       image: "/images/Survivor.png"
     },
     {
-      title: "AMAZING RACE",
+      title: "SQUID GAME",
       status: "LOCKED",
-      image: "/images/AmazingRace.png"
+      quarter: "Q3 2026",
+      primaryActivation: "TBD",
+      image: "/images/SquidGame.png"
     }
   ];
   
@@ -62,27 +71,39 @@ export default function Home() {
       {/* Minimal Footer */}
       <footer className="relative border-t-2 border-zinc-800 bg-black/80 backdrop-blur-sm flex-shrink-0">
         <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-center gap-2">
-            <div className="flex gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-lg shadow-accent/50" style={{ animationDelay: '0.3s' }} />
-              <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50" style={{ animationDelay: '0.6s' }} />
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <div className="hidden sm:flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-lg shadow-accent/50" style={{ animationDelay: '0.3s' }} />
+                <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50" style={{ animationDelay: '0.6s' }} />
+              </div>
+              <a 
+                href="mailto:sidequesterpix@gmail.com?subject=Inquiry"
+                className="arcade-font text-[0.4rem] sm:text-[0.5rem] text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
+              >
+                <Mail className="w-2.5 h-2.5" />
+                INQUIRIES
+              </a>
             </div>
             <p className="arcade-font text-[0.4rem] sm:text-[0.5rem] text-zinc-500">
               © {currentYear} THE BEACON HQ
             </p>
-            <a 
-              href="https://github.com/ianherdegen/The-Beacon" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[0.4rem] sm:text-[0.5rem] hover:opacity-80 transition-opacity duration-200"
-            >
-              🔧
-            </a>
-            <div className="flex gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50" />
-              <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-lg shadow-accent/50" style={{ animationDelay: '0.3s' }} />
-              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" style={{ animationDelay: '0.6s' }} />
+            <div className="flex items-center gap-2">
+              <a 
+                href="https://github.com/ianherdegen/The-Beacon" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="arcade-font text-[0.4rem] sm:text-[0.5rem] text-secondary hover:text-secondary/80 transition-colors flex items-center gap-1"
+              >
+                <Code2 className="w-2.5 h-2.5" />
+                DEVELOPERS
+              </a>
+              <div className="hidden sm:flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-lg shadow-accent/50" style={{ animationDelay: '0.3s' }} />
+                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" style={{ animationDelay: '0.6s' }} />
+              </div>
             </div>
           </div>
         </div>
