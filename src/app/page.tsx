@@ -9,23 +9,32 @@ export default function Home() {
   const games = [
     {
       title: "BORDERLAND",
-      status: "Live Now",
+      status: "Concluded",
+      quarter: "Q4 2025",
+      primaryActivation: "Alice in Russell-Land",
       image: "/images/Borderland.png",
       link: "https://borderland.thebeaconhq.com"
     },
     {
-      title: "SQUID GAME",
-      status: "LOCKED",
-      image: "/images/SquidGame.png"
+      title: "HAIL MARY PROJECT",
+      status: "Sign Up",
+      quarter: "Q1 2026",
+      primaryActivation: "Pier 70",
+      image: "/images/HailMary.png",
+      link: "https://survivor.thebeaconhq.com"
     },
     {
-      title: "SURVIVOR",
+      title: "SQUID GAME",
       status: "LOCKED",
-      image: "/images/Survivor.png"
+      quarter: "Q2 2026",
+      primaryActivation: "TBD",
+      image: "/images/SquidGame.png"
     },
     {
       title: "AMAZING RACE",
       status: "LOCKED",
+      quarter: "Q3 2026",
+      primaryActivation: "TBD",
       image: "/images/AmazingRace.png"
     }
   ];

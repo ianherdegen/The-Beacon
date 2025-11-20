@@ -9,6 +9,8 @@ interface Game {
   status: string;
   image: string;
   link?: string;
+  quarter?: string;
+  primaryActivation?: string;
 }
 
 interface GameCarouselProps {
@@ -16,7 +18,7 @@ interface GameCarouselProps {
 }
 
 export function GameCarousel({ games }: GameCarouselProps) {
-  const [centerIndex, setCenterIndex] = useState(games.length); // Start at first item of middle set
+  const [centerIndex, setCenterIndex] = useState(games.length + 1); // Start at Hail Mary Project (second item) of middle set
   const [isMobileLandscape, setIsMobileLandscape] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -145,10 +147,10 @@ export function GameCarousel({ games }: GameCarouselProps) {
   }, []);
 
   useEffect(() => {
-    // Initialize to first item of middle set after a short delay
+    // Initialize to Hail Mary Project (second item) of middle set after a short delay
     const timer = setTimeout(() => {
-      scrollToIndex(games.length, false);
-      setCenterIndex(games.length);
+      scrollToIndex(games.length + 1, false);
+      setCenterIndex(games.length + 1);
     }, 100);
     
     return () => {
@@ -171,7 +173,11 @@ export function GameCarousel({ games }: GameCarouselProps) {
                   src={game.image}
                   alt={game.title}
                   className={`w-full h-full object-cover ${
-                    game.status === "LOCKED" ? 'grayscale opacity-70' : ''
+                    game.status === "LOCKED" 
+                      ? 'grayscale opacity-70' 
+                      : game.status === "Concluded"
+                        ? 'grayscale contrast-75'
+                        : ''
                   }`}
                 />
               </div>
@@ -180,9 +186,43 @@ export function GameCarousel({ games }: GameCarouselProps) {
                   {game.title}
                 </h3>
                 <p className="arcade-font text-[0.4rem] text-zinc-400 mb-2">
-                  {game.status}
+                  {game.status === "Sign Up" ? "Scheduled" : game.status}{game.quarter && ` | ${game.quarter}`}
                 </p>
-                {game.link ? (
+                {game.status === "LOCKED" ? (
+                  <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
+                    LOCKED
+                  </div>
+                ) : game.status === "Concluded" ? (
+                  game.link ? (
+                    <a 
+                      href={game.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="arcade-font text-[0.4rem] px-2 py-1 bg-amber-400 text-amber-950 rounded border border-amber-300 hover:bg-amber-300 transition-colors"
+                    >
+                      RESULTS
+                    </a>
+                  ) : (
+                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-amber-400 text-amber-950 rounded border border-amber-300">
+                      RESULTS
+                    </div>
+                  )
+                ) : game.status === "Sign Up" ? (
+                  game.link ? (
+                    <a 
+                      href={game.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400 hover:bg-emerald-400 transition-colors"
+                    >
+                      SIGN UP
+                    </a>
+                  ) : (
+                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400">
+                      SIGN UP
+                    </div>
+                  )
+                ) : game.link ? (
                   <a 
                     href={game.link} 
                     target="_blank" 
@@ -256,6 +296,8 @@ export function GameCarousel({ games }: GameCarouselProps) {
                 status={game.status}
                 image={game.image}
                 link={game.link}
+                quarter={game.quarter}
+                primaryActivation={game.primaryActivation}
                 featured={centerIndex === index}
               />
             </div>
