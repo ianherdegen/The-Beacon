@@ -174,9 +174,9 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
     <div className="group relative">
       {/* Arcade Cabinet Body */}
       <div className={`relative bg-black border-8 ${cardBorderClass} shadow-2xl transition-all duration-300 hover:scale-[1.02] ${isConcluded && isBorderland ? 'hover:border-red-500' : isConcluded ? 'hover:border-amber-500' : ''}`}
-      style={{
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
-      }}>
+        style={{
+          background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
+        }}>
         
         {/* Side panels with texture */}
         <div className="absolute -left-4 top-12 bottom-12 w-4 bg-gradient-to-r from-zinc-900 to-zinc-800 
@@ -305,18 +305,48 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
           
           <div className="flex items-center justify-center gap-4 relative z-10">
             {/* Host Button - Icon on mobile, text on desktop */}
-            <div className={`arcade-font text-[0.5rem] flex items-center gap-1 px-3 py-1 bg-zinc-800 border-2 border-zinc-700 shadow-lg hidden sm:flex ${
-              isComingSoon ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer transition-all duration-200 hover:scale-110'
-            }`}
-              style={{
-                boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
-              }}>
-              <Radio className="w-3 h-3" />
-              <span>HOST</span>
-            </div>
-            <Radio className={`w-5 h-5 text-white sm:hidden ${
-              isComingSoon ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer transition-all duration-200 hover:scale-110'
-            }`} />
+            {isComingSoon ? (
+              <>
+                <div className="arcade-font text-[0.5rem] flex items-center gap-1 px-3 py-1 bg-zinc-800 border-2 border-zinc-700 shadow-lg hidden sm:flex opacity-50 cursor-not-allowed"
+                  style={{
+                    boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                  }}>
+                  <Radio className="w-3 h-3" />
+                  <span>HOST</span>
+                </div>
+                <Radio className="w-5 h-5 text-white sm:hidden opacity-50 cursor-not-allowed" />
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const mailtoLink = document.createElement('a');
+                    mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                    mailtoLink.click();
+                  }}
+                  className="arcade-font text-[0.5rem] flex items-center gap-1 px-3 py-1 bg-zinc-800 border-2 border-zinc-700 shadow-lg hidden sm:flex cursor-pointer transition-all duration-200 hover:scale-110"
+                  style={{
+                    boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                  }}>
+                  <Radio className="w-3 h-3" />
+                  <span>HOST</span>
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const mailtoLink = document.createElement('a');
+                    mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                    mailtoLink.click();
+                  }}
+                  className="w-5 h-5 text-white sm:hidden cursor-pointer transition-all duration-200 hover:scale-110"
+                >
+                  <Radio className="w-5 h-5" />
+                </button>
+              </>
+            )}
             
             {/* Arcade Buttons */}
             <div className="flex gap-2">
@@ -412,9 +442,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
                   <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed">
                     This is the featured activation of this game,{' '}
                     <a 
-                      href="https://github.com/ianherdegen/The-Beacon" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+                      href="mailto:sidequesterpix@gmail.com?subject=Host a Hyperlocal Clone"
                       className="text-primary hover:text-primary/80 underline transition-colors"
                       onClick={(e) => e.stopPropagation()}>
                       host a hyperlocal clone

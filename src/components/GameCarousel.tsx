@@ -270,9 +270,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
               <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed mt-2">
                 This is the featured activation of this game,{' '}
                 <a 
-                  href="https://github.com/ianherdegen/The-Beacon" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="mailto:sidequesterpix@gmail.com?subject=Host a Hyperlocal Clone"
                   className="text-primary hover:text-primary/80 underline transition-colors"
                   onClick={(e) => e.stopPropagation()}>
                   host a hyperlocal clone

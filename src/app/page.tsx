@@ -21,7 +21,7 @@ export default function Home() {
       quarter: "Q1 2026",
       primaryActivation: "Pier 70",
       image: "/images/HailMary.png",
-      link: "https://survivor.thebeaconhq.com"
+      link: "https://forms.gle/Z5hLqvVyqFHWGZu29"
     },
     {
       title: "SURVIVOR",
@@ -79,7 +79,7 @@ export default function Home() {
                 <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-lg shadow-secondary/50" style={{ animationDelay: '0.6s' }} />
               </div>
               <a 
-                href="mailto:hello@thebeaconhq.com?subject=Inquiry"
+                href="mailto:sidequesterpix@gmail.com?subject=Inquiry"
                 className="arcade-font text-[0.4rem] sm:text-[0.5rem] text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
               >
                 <Mail className="w-2.5 h-2.5" />
