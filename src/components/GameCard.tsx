@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Badge } from "./ui/badge";
-import { Circle, Play, RefreshCcw, Copy, Info, Radio, Trophy, X } from "lucide-react";
+import { Circle, Play, RefreshCcw, Copy, Info, Radio, Trophy, X, UserPlus, Lock } from "lucide-react";
 
 interface GameCardProps {
   title: string;
@@ -117,7 +117,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
           style={{
             boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
           }}>
-          <Circle className="w-3 h-3" />
+          <Lock className="w-3 h-3" />
           <span>LOCKED</span>
         </div>
       );
@@ -141,7 +141,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
           style={{
             boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
           }}>
-          <Circle className="w-3 h-3" />
+          <UserPlus className="w-3 h-3" />
           <span>SIGN UP</span>
         </div>
       );
@@ -164,7 +164,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
         style={{
           boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
         }}>
-        <Circle className="w-3 h-3" />
+        <Lock className="w-3 h-3" />
         <span>LOCKED</span>
       </div>
     );
@@ -377,10 +377,10 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
           {cardContent}
         </a>
         {/* Featured Activation Info - Below Game Console */}
-        {primaryActivation && (
+        {primaryActivation && !isComingSoon && (
           <>
             <div className="flex items-center justify-center gap-1 mt-4">
-              <div className="arcade-font text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
+              <div className="arcade-font text-[0.4rem] sm:text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -389,7 +389,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
                   }}
                   className="cursor-pointer hover:opacity-80 transition-opacity"
                   aria-label="Show featured activation info">
-                  <Info className="w-2.5 h-2.5" />
+                  <Info className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
                 </button>
                 <span>Featured Activation: {primaryActivation}</span>
               </div>
@@ -433,15 +433,15 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
     <div>
       {cardContent}
       {/* Featured Activation Info - Below Game Console */}
-      {primaryActivation && (
+      {primaryActivation && !isComingSoon && (
         <>
           <div className="flex items-center justify-center gap-1 mt-4">
-            <div className="arcade-font text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
+            <div className="arcade-font text-[0.4rem] sm:text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="cursor-pointer hover:opacity-80 transition-opacity"
                 aria-label="Show featured activation info">
-                <Info className="w-2.5 h-2.5" />
+                <Info className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
               </button>
               <span>Featured Activation: {primaryActivation}</span>
             </div>
