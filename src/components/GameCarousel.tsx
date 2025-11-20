@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { GameCard } from "./GameCard";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Info, X } from "lucide-react";
 
 interface Game {
   title: string;
@@ -20,6 +20,7 @@ interface GameCarouselProps {
 export function GameCarousel({ games }: GameCarouselProps) {
   const [centerIndex, setCenterIndex] = useState(games.length + 1); // Start at Hail Mary Project (second item) of middle set
   const [isMobileLandscape, setIsMobileLandscape] = useState(false);
+  const [openModalIndex, setOpenModalIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isScrollingRef = useRef(false);
@@ -175,9 +176,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
                   className={`w-full h-full object-cover ${
                     game.status === "LOCKED" 
                       ? 'grayscale opacity-70' 
-                      : game.status === "Concluded"
-                        ? 'grayscale contrast-75'
-                        : ''
+                      : ''
                   }`}
                 />
               </div>
@@ -188,58 +187,100 @@ export function GameCarousel({ games }: GameCarouselProps) {
                 <p className="arcade-font text-[0.4rem] text-zinc-400 mb-2">
                   {game.status === "Sign Up" ? "Scheduled" : game.status}{game.quarter && ` | ${game.quarter}`}
                 </p>
-                {game.status === "LOCKED" ? (
-                  <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
-                    LOCKED
-                  </div>
-                ) : game.status === "Concluded" ? (
-                  game.link ? (
+                <div className="flex items-center justify-center gap-1">
+                  {game.status === "LOCKED" ? (
+                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
+                      LOCKED
+                    </div>
+                  ) : game.status === "Concluded" ? (
+                    game.link ? (
+                      <a 
+                        href={game.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white hover:bg-zinc-100 transition-colors"
+                      >
+                        RESULTS
+                      </a>
+                    ) : (
+                      <div className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white">
+                        RESULTS
+                      </div>
+                    )
+                  ) : game.status === "Sign Up" ? (
+                    game.link ? (
+                      <a 
+                        href={game.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400 hover:bg-emerald-400 transition-colors"
+                      >
+                        SIGN UP
+                      </a>
+                    ) : (
+                      <div className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400">
+                        SIGN UP
+                      </div>
+                    )
+                  ) : game.link ? (
                     <a 
                       href={game.link} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="arcade-font text-[0.4rem] px-2 py-1 bg-amber-400 text-amber-950 rounded border border-amber-300 hover:bg-amber-300 transition-colors"
+                      className="arcade-font text-[0.4rem] px-2 py-1 bg-primary text-white rounded border border-primary hover:bg-primary/80 transition-colors"
                     >
-                      RESULTS
+                      PLAY
                     </a>
                   ) : (
-                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-amber-400 text-amber-950 rounded border border-amber-300">
-                      RESULTS
+                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
+                      LOCKED
                     </div>
-                  )
-                ) : game.status === "Sign Up" ? (
-                  game.link ? (
-                    <a 
-                      href={game.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400 hover:bg-emerald-400 transition-colors"
-                    >
-                      SIGN UP
-                    </a>
-                  ) : (
-                    <div className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400">
-                      SIGN UP
-                    </div>
-                  )
-                ) : game.link ? (
-                  <a 
-                    href={game.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="arcade-font text-[0.4rem] px-2 py-1 bg-primary text-white rounded border border-primary hover:bg-primary/80 transition-colors"
-                  >
-                    PLAY
-                  </a>
-                ) : (
-                  <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
-                    LOCKED
-                  </div>
-                )}
+                  )}
+                  {game.primaryActivation && game.status !== "LOCKED" && (
+                    <button
+                      onClick={() => setOpenModalIndex(index)}
+                      className="cursor-pointer hover:opacity-80 transition-opacity"
+                      aria-label="Show featured activation info">
+                      <Info className="w-3 h-3 text-zinc-400" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
+        {/* Modal for Featured Activation */}
+        {openModalIndex !== null && games[openModalIndex]?.primaryActivation && (
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={() => setOpenModalIndex(null)}>
+            <div 
+              className="relative bg-black border-4 border-white/50 p-6 max-w-md mx-4 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setOpenModalIndex(null)}
+                className="absolute top-2 right-2 text-white hover:text-zinc-400 transition-colors"
+                aria-label="Close modal">
+                <X className="w-5 h-5" />
+              </button>
+              <h3 className="arcade-font text-white text-xs mb-4">Featured Activation</h3>
+              <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed">
+                Featured Activation: <span className="text-primary">{games[openModalIndex].primaryActivation}</span>
+              </p>
+              <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed mt-2">
+                This is the featured activation of this game,{' '}
+                <a 
+                  href="https://github.com/ianherdegen/The-Beacon" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 underline transition-colors"
+                  onClick={(e) => e.stopPropagation()}>
+                  host a hyperlocal clone
+                </a>.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
