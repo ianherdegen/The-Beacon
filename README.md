@@ -62,13 +62,13 @@ yarn build
 
 ## API
 
-The Beacon provides a simple API endpoint to get information about currently live games:
+The Beacon provides a simple API endpoint to get information about all games:
 
-### Live Games Endpoint
+### Games Endpoint
 
-**GET** `/api/live-games/`
+**GET** `/api/games/`
 
-Returns a JSON response with currently live games and their links.
+Returns a JSON response with all games, including their titles and statuses.
 
 **Example Response:**
 ```json
@@ -77,8 +77,19 @@ Returns a JSON response with currently live games and their links.
   "data": [
     {
       "title": "BORDERLAND",
-      "status": "Live Now",
-      "link": "https://borderland.thebeaconhq.com"
+      "status": "Open"
+    },
+    {
+      "title": "SURVIVOR",
+      "status": "LOCKED"
+    },
+    {
+      "title": "SQUID GAME",
+      "status": "LOCKED"
+    },
+    {
+      "title": "AMAZING RACE",
+      "status": "LOCKED"
     }
   ]
 }
@@ -86,7 +97,7 @@ Returns a JSON response with currently live games and their links.
 
 **Usage:**
 ```bash
-curl http://localhost:3000/api/live-games/
+curl http://localhost:3000/api/games/
 ```
 
-This endpoint can be used by external applications to discover and link to currently active games.
+This endpoint can be used by external applications to discover all available games and their current statuses.
