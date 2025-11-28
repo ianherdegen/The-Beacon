@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { GameCard } from "./GameCard";
-import { ChevronLeft, ChevronRight, Info, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Radio, Play, Trophy } from "lucide-react";
 
 interface Game {
   title: string;
@@ -10,7 +10,6 @@ interface Game {
   image: string;
   link?: string;
   quarter?: string;
-  primaryActivation?: string;
 }
 
 interface GameCarouselProps {
@@ -18,7 +17,7 @@ interface GameCarouselProps {
 }
 
 export function GameCarousel({ games }: GameCarouselProps) {
-  const [centerIndex, setCenterIndex] = useState(games.length + 1); // Start at Hail Mary Project (second item) of middle set
+  const [centerIndex, setCenterIndex] = useState(games.length); // Start at Borderland (first item) of middle set
   const [isMobileLandscape, setIsMobileLandscape] = useState(false);
   const [openModalIndex, setOpenModalIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -148,10 +147,10 @@ export function GameCarousel({ games }: GameCarouselProps) {
   }, []);
 
   useEffect(() => {
-    // Initialize to Hail Mary Project (second item) of middle set after a short delay
+    // Initialize to Borderland (first item) of middle set after a short delay
     const timer = setTimeout(() => {
-      scrollToIndex(games.length + 1, false);
-      setCenterIndex(games.length + 1);
+      scrollToIndex(games.length, false);
+      setCenterIndex(games.length);
     }, 100);
     
     return () => {
@@ -185,7 +184,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
                   {game.title}
                 </h3>
                 <p className="arcade-font text-[0.4rem] text-zinc-400 mb-2">
-                  {game.status === "Sign Up" ? "Scheduled" : game.status}{game.quarter && ` | ${game.quarter}`}
+                  {game.status === "Sign Up" ? "Scheduled" : game.status}
                 </p>
                 <div className="flex items-center justify-center gap-1">
                   {game.status === "LOCKED" ? (
@@ -193,69 +192,115 @@ export function GameCarousel({ games }: GameCarouselProps) {
                       LOCKED
                     </div>
                   ) : game.status === "Concluded" ? (
-                    game.link ? (
-                      <a 
-                        href={game.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white hover:bg-zinc-100 transition-colors"
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const mailtoLink = document.createElement('a');
+                          mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                          mailtoLink.click();
+                        }}
+                        className="arcade-font text-[0.4rem] flex items-center gap-1 px-2 py-1 bg-zinc-800 border border-zinc-700 text-white rounded hover:bg-zinc-700 transition-colors"
                       >
-                        RESULTS
-                      </a>
-                    ) : (
-                      <div className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white">
-                        RESULTS
-                      </div>
-                    )
+                        <Radio className="w-2.5 h-2.5" />
+                        <span>HOST</span>
+                      </button>
+                      {game.link ? (
+                        <a 
+                          href={game.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white hover:bg-zinc-100 transition-colors"
+                        >
+                          RESULTS
+                        </a>
+                      ) : (
+                        <div className="arcade-font text-[0.4rem] px-2 py-1 bg-white text-black rounded border border-white">
+                          RESULTS
+                        </div>
+                      )}
+                    </>
                   ) : game.status === "Sign Up" ? (
-                    game.link ? (
-                      <a 
-                        href={game.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400 hover:bg-emerald-400 transition-colors"
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const mailtoLink = document.createElement('a');
+                          mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                          mailtoLink.click();
+                        }}
+                        className="arcade-font text-[0.4rem] flex items-center gap-1 px-2 py-1 bg-zinc-800 border border-zinc-700 text-white rounded hover:bg-zinc-700 transition-colors"
                       >
-                        SIGN UP
-                      </a>
-                    ) : (
-                      <div className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400">
-                        SIGN UP
-                      </div>
-                    )
+                        <Radio className="w-2.5 h-2.5" />
+                        <span>HOST</span>
+                      </button>
+                      {game.link ? (
+                        <a 
+                          href={game.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400 hover:bg-emerald-400 transition-colors"
+                        >
+                          SIGN UP
+                        </a>
+                      ) : (
+                        <div className="arcade-font text-[0.4rem] px-2 py-1 bg-emerald-500 text-emerald-950 rounded border border-emerald-400">
+                          SIGN UP
+                        </div>
+                      )}
+                    </>
                   ) : game.link ? (
-                    <a 
-                      href={game.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="arcade-font text-[0.4rem] px-2 py-1 bg-primary text-white rounded border border-primary hover:bg-primary/80 transition-colors"
-                    >
-                      PLAY
-                    </a>
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const mailtoLink = document.createElement('a');
+                          mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                          mailtoLink.click();
+                        }}
+                        className="arcade-font text-[0.4rem] flex items-center gap-1 px-2 py-1 bg-zinc-800 border border-zinc-700 text-white rounded hover:bg-zinc-700 transition-colors"
+                      >
+                        <Radio className="w-2.5 h-2.5" />
+                        <span>HOST</span>
+                      </button>
+                      {game.title.trim().toUpperCase() === "BORDERLAND" ? (
+                        <button
+                          onClick={() => setOpenModalIndex(index)}
+                          className="arcade-font text-[0.4rem] px-2 py-1 bg-primary text-white rounded border border-primary hover:bg-primary/80 transition-colors"
+                        >
+                          PLAY
+                        </button>
+                      ) : (
+                        <a 
+                          href={game.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="arcade-font text-[0.4rem] px-2 py-1 bg-primary text-white rounded border border-primary hover:bg-primary/80 transition-colors"
+                        >
+                          PLAY
+                        </a>
+                      )}
+                    </>
                   ) : (
                     <div className="arcade-font text-[0.4rem] px-2 py-1 bg-zinc-600 text-zinc-300 rounded border border-zinc-500">
                       LOCKED
                     </div>
-                  )}
-                  {game.primaryActivation && game.status !== "LOCKED" && (
-                    <button
-                      onClick={() => setOpenModalIndex(index)}
-                      className="cursor-pointer hover:opacity-80 transition-opacity"
-                      aria-label="Show featured activation info">
-                      <Info className="w-3 h-3 text-zinc-400" />
-                    </button>
                   )}
                 </div>
               </div>
             </div>
           ))}
         </div>
-        {/* Modal for Featured Activation */}
-        {openModalIndex !== null && games[openModalIndex]?.primaryActivation && (
+        {/* Borderland Activations Modal */}
+        {openModalIndex !== null && games[openModalIndex]?.title.trim().toUpperCase() === "BORDERLAND" && (
           <div 
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
             onClick={() => setOpenModalIndex(null)}>
             <div 
-              className="relative bg-black border-4 border-white/50 p-6 max-w-md mx-4 shadow-2xl"
+              className="relative bg-black border-4 border-red-500/50 p-6 max-w-md mx-4 shadow-2xl"
               onClick={(e) => e.stopPropagation()}>
               <button
                 onClick={() => setOpenModalIndex(null)}
@@ -263,19 +308,101 @@ export function GameCarousel({ games }: GameCarouselProps) {
                 aria-label="Close modal">
                 <X className="w-5 h-5" />
               </button>
-              <h3 className="arcade-font text-white text-xs mb-4">Featured Activation</h3>
-              <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed">
-                Featured Activation: <span className="text-primary">{games[openModalIndex].primaryActivation}</span>
-              </p>
-              <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed mt-2">
-                This is the featured activation of this game,{' '}
-                <a 
-                  href="mailto:sidequesterpix@gmail.com?subject=Host a Hyperlocal Clone"
-                  className="text-primary hover:text-primary/80 underline transition-colors"
-                  onClick={(e) => e.stopPropagation()}>
-                  host a hyperlocal clone
-                </a>.
-              </p>
+              <h3 className="arcade-font text-white text-xs mb-4 text-center">BORDERLAND ACTIVATIONS</h3>
+              <div className="mb-4 pb-4 border-b-2 border-red-500/50">
+                <p className="arcade-font text-white/90 text-[0.5rem] text-center flex items-center justify-center gap-1">
+                  <span className="text-red-400 font-bold">Featured:</span> 
+                  <a 
+                    href="https://forms.gle/Z5hLqvVyqFHWGZu29"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-green-400 transition-colors cursor-pointer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Pier 70
+                  </a>
+                </p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full arcade-font text-[0.5rem]">
+                  <thead>
+                    <tr className="border-b-2 border-red-500/50">
+                      <th className="text-center text-white/90 py-2 px-2">Activation</th>
+                      <th className="text-center text-white/90 py-2 px-2">Status</th>
+                      <th className="text-center text-white/90 py-2 px-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { name: "Pier 70", status: "Scheduled", link: "https://forms.gle/Z5hLqvVyqFHWGZu29" },
+                      { name: "Alice In Russell-Land", status: "Concluded", link: "https://borderland.thebeaconhq.com" }
+                    ].map((activation, index) => (
+                      <tr 
+                        key={index} 
+                        className={`border-b border-red-500/20 transition-colors hover:bg-red-500/20 ${
+                          activation.link ? 'cursor-pointer' : ''
+                        }`}
+                        onClick={(e) => {
+                          if (activation.link) {
+                            window.open(activation.link, '_blank', 'noopener,noreferrer');
+                          }
+                        }}
+                      >
+                        <td className="text-white/90 py-3 px-3">{activation.name}</td>
+                        <td className="text-white/90 py-3 px-3">
+                          <span className={`${
+                            activation.status === "Scheduled" ? "text-blue-400" :
+                            activation.status === "Concluded" ? "text-amber-400" :
+                            activation.status === "Open" ? "text-green-400" :
+                            "text-white/70"
+                          }`}>
+                            {activation.status}
+                          </span>
+                        </td>
+                        <td className="py-3 px-3">
+                          {activation.link && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(activation.link, '_blank', 'noopener,noreferrer');
+                              }}
+                              className={`arcade-font text-[0.5rem] flex items-center justify-center px-3 py-1 border-2 shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer w-[90px] ${
+                                activation.status === "Scheduled"
+                                  ? "bg-green-500 text-green-950 border-green-400 shadow-green-500/60"
+                                  : activation.status === "Concluded"
+                                  ? "bg-zinc-800 text-zinc-400 border-zinc-700"
+                                  : "bg-primary text-white border-primary shadow-primary/60"
+                              }`}
+                              style={{
+                                boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                              }}
+                            >
+                              {activation.status === "Scheduled" ? "PLAY" : activation.status === "Concluded" ? "RESULTS" : "PLAY"}
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-6 flex justify-center">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const mailtoLink = document.createElement('a');
+                    mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                    mailtoLink.click();
+                  }}
+                  className="arcade-font text-[0.5rem] flex items-center gap-1 px-4 py-2 bg-zinc-800 border-2 border-zinc-700 text-white shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer"
+                  style={{
+                    boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                  }}>
+                  <Radio className="w-3 h-3" />
+                  <span>HOST</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -336,7 +463,6 @@ export function GameCarousel({ games }: GameCarouselProps) {
                 image={game.image}
                 link={game.link}
                 quarter={game.quarter}
-                primaryActivation={game.primaryActivation}
                 featured={centerIndex === index}
               />
             </div>

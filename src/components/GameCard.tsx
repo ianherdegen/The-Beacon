@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "./ui/badge";
-import { Circle, Play, RefreshCcw, Copy, Info, Radio, Trophy, X, UserPlus, Lock } from "lucide-react";
+import { Circle, Play, RefreshCcw, Copy, Radio, Trophy, UserPlus, Lock, X } from "lucide-react";
 
 interface GameCardProps {
   title: string;
@@ -10,14 +10,19 @@ interface GameCardProps {
   image: string;
   link?: string;
   quarter?: string;
-  primaryActivation?: string;
   featured?: boolean;
 }
 
-export function GameCard({ title, status, image, link, quarter, primaryActivation, featured = false }: GameCardProps) {
+export function GameCard({ title, status, image, link, quarter, featured = false }: GameCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>();
+  
+  // Close modal when carousel moves (card is no longer featured)
+  useEffect(() => {
+    if (!featured && isModalOpen) {
+      setIsModalOpen(false);
+    }
+  }, [featured, isModalOpen]);
+  
   const isComingSoon = status === "LOCKED";
   const isLive = status === "Live Now";
   const isConcluded = status === "Concluded";
@@ -26,7 +31,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
   const isBorderland = title.trim().toUpperCase() === "BORDERLAND";
   const cardBorderClass = isComingSoon
     ? "border-zinc-700"
-    : isConcluded && isBorderland
+    : isBorderland
       ? "border-red-500"
       : isConcluded
         ? "border-amber-500"
@@ -39,7 +44,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
     if (isComingSoon) {
       return "bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700";
     }
-    if (isConcluded && isBorderland) {
+    if (isBorderland) {
       return "bg-gradient-to-r from-red-500/90 via-red-400/80 to-red-500/90";
     }
     if (isConcluded) {
@@ -67,48 +72,6 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
   const imageEffectClass = isComingSoon
     ? "grayscale opacity-70"
     : "";
-
-  // Detect scrolling to prevent modal from closing during scroll
-  useEffect(() => {
-    if (!isModalOpen) return;
-
-    const handleScroll = () => {
-      isScrollingRef.current = true;
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-      scrollTimeoutRef.current = setTimeout(() => {
-        isScrollingRef.current = false;
-      }, 150);
-    };
-
-    // Listen to scroll events on the carousel container and window
-    window.addEventListener('scroll', handleScroll, true);
-    window.addEventListener('wheel', handleScroll, { passive: true, capture: true });
-    window.addEventListener('touchmove', handleScroll, { passive: true, capture: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll, true);
-      window.removeEventListener('wheel', handleScroll, true);
-      window.removeEventListener('touchmove', handleScroll, true);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, [isModalOpen]);
-
-  // Close modal when card is no longer featured (scrolled away)
-  useEffect(() => {
-    if (!featured && isModalOpen) {
-      setIsModalOpen(false);
-    }
-  }, [featured, isModalOpen]);
-
-  const handleBackdropClick = () => {
-    // Don't close if we're currently scrolling
-    if (isScrollingRef.current) return;
-    setIsModalOpen(false);
-  };
 
   const renderActionButton = () => {
     if (isComingSoon) {
@@ -148,13 +111,30 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
     }
 
     if (link) {
+      if (isBorderland) {
+        return (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsModalOpen(true);
+            }}
+            className="arcade-font text-[0.5rem] flex items-center gap-1 px-3 py-1 bg-green-500 border-2 border-green-400 text-green-950 shadow-lg shadow-green-500/60 transition-all duration-200 hover:scale-110 cursor-pointer"
+            style={{
+              boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+            }}>
+            <Play className="w-3 h-3" />
+            <span>PLAY</span>
+          </button>
+        );
+      }
       return (
         <div className="arcade-font text-[0.5rem] flex items-center gap-1 px-3 py-1 bg-green-500 border-2 border-green-400 text-green-950 shadow-lg shadow-green-500/60 transition-all duration-200 hover:scale-110 cursor-pointer"
           style={{
             boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
           }}>
           <Play className="w-3 h-3" />
-          <span>START</span>
+          <span>PLAY</span>
         </div>
       );
     }
@@ -173,7 +153,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
   const cardContent = (
     <div className="group relative">
       {/* Arcade Cabinet Body */}
-      <div className={`relative bg-black border-8 ${cardBorderClass} shadow-2xl transition-all duration-300 hover:scale-[1.02] ${isConcluded && isBorderland ? 'hover:border-red-500' : isConcluded ? 'hover:border-amber-500' : ''}`}
+      <div className={`relative bg-black border-8 ${cardBorderClass} shadow-2xl transition-all duration-300 hover:scale-[1.02] ${isBorderland ? 'hover:border-red-500' : isConcluded ? 'hover:border-amber-500' : ''}`}
         style={{
           background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
         }}>
@@ -196,7 +176,7 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
         <div className={`relative ${marqueeGradient} p-4 border-b-4 ${
           isComingSoon
             ? 'border-zinc-700'
-            : isConcluded && isBorderland
+            : isBorderland
               ? 'border-red-500'
               : isConcluded
                 ? 'border-amber-500'
@@ -254,14 +234,6 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
             {isSignUp ? "Scheduled" : status}
           </Badge>
         </div>
-
-        {quarter && (
-          <div className="absolute top-16 left-4 z-20 max-w-[200px]">
-            <div className="arcade-font text-[0.45rem] uppercase tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap">
-              {quarter}
-            </div>
-          </div>
-        )}
 
         {/* Screen Area */}
         <div className="p-6 bg-black">
@@ -400,87 +372,25 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
     </div>
   );
 
-  if (link) {
-    return (
-      <div>
-        <a href={link} target="_blank" rel="noopener noreferrer" className="game-card-link block no-underline focus:outline-none focus:ring-0 hover:no-underline text-inherit [&>*]:text-inherit [&>*]:hover:text-inherit [&_*]:!text-inherit">
-          {cardContent}
-        </a>
-        {/* Featured Activation Info - Below Game Console */}
-        {primaryActivation && !isComingSoon && (
-          <>
-            <div className="flex items-center justify-center gap-1 mt-4">
-              <div className="arcade-font text-[0.4rem] sm:text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setIsModalOpen(true);
-                  }}
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                  aria-label="Show featured activation info">
-                  <Info className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
-                </button>
-                <span>Featured Activation: {primaryActivation}</span>
-              </div>
-            </div>
-            {/* Modal */}
-            {isModalOpen && (
-              <div 
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-                onClick={handleBackdropClick}>
-                <div 
-                  className="relative bg-black border-4 border-white/50 p-6 max-w-md mx-4 shadow-2xl"
-                  onClick={(e) => e.stopPropagation()}>
-                  <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="absolute top-2 right-2 text-white hover:text-zinc-400 transition-colors"
-                    aria-label="Close modal">
-                    <X className="w-5 h-5" />
-                  </button>
-                  <h3 className="arcade-font text-white text-xs mb-4">Featured Activation</h3>
-                  <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed">
-                    This is the featured activation of this game,{' '}
-                    <a 
-                      href="mailto:sidequesterpix@gmail.com?subject=Host a Hyperlocal Clone"
-                      className="text-primary hover:text-primary/80 underline transition-colors"
-                      onClick={(e) => e.stopPropagation()}>
-                      host a hyperlocal clone
-                    </a>.
-                  </p>
-                </div>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    );
-  }
+  const activations = [
+    { name: "Pier 70", status: "Scheduled", link: "https://forms.gle/Z5hLqvVyqFHWGZu29", action: "Sign Up" },
+    { name: "Alice In Russell-Land", status: "Concluded", link: "https://borderland.thebeaconhq.com", action: "Results" }
+  ];
 
-  return (
-    <div>
-      {cardContent}
-      {/* Featured Activation Info - Below Game Console */}
-      {primaryActivation && !isComingSoon && (
-        <>
-          <div className="flex items-center justify-center gap-1 mt-4">
-            <div className="arcade-font text-[0.4rem] sm:text-[0.45rem] tracking-wide px-2 py-0.5 bg-black/70 border border-white/20 text-white/80 shadow-lg shadow-black/40 whitespace-nowrap flex items-center gap-1">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="cursor-pointer hover:opacity-80 transition-opacity"
-                aria-label="Show featured activation info">
-                <Info className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
-              </button>
-              <span>Featured Activation: {primaryActivation}</span>
-            </div>
+  if (link) {
+    if (isBorderland) {
+      return (
+        <div>
+          <div className="game-card-link block no-underline focus:outline-none focus:ring-0 hover:no-underline text-inherit [&>*]:text-inherit [&>*]:hover:text-inherit [&_*]:!text-inherit">
+            {cardContent}
           </div>
-          {/* Modal */}
+          {/* Activations Modal */}
           {isModalOpen && (
             <div 
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-              onClick={handleBackdropClick}>
+              onClick={() => setIsModalOpen(false)}>
               <div 
-                className="relative bg-black border-4 border-white/50 p-6 max-w-md mx-4 shadow-2xl"
+                className="relative bg-black border-4 border-red-500/50 p-6 max-w-md mx-4 shadow-2xl"
                 onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -488,23 +398,116 @@ export function GameCard({ title, status, image, link, quarter, primaryActivatio
                   aria-label="Close modal">
                   <X className="w-5 h-5" />
                 </button>
-                <h3 className="arcade-font text-white text-xs mb-4">Featured Activation</h3>
-                <p className="arcade-font text-white/90 text-[0.5rem] leading-relaxed">
-                  This is the featured activation of this game,{' '}
-                  <a 
-                    href="https://github.com/ianherdegen/The-Beacon" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-primary/80 underline transition-colors"
-                    onClick={(e) => e.stopPropagation()}>
-                    host a hyperlocal clone
-                  </a>.
-                </p>
+                <h3 className="arcade-font text-white text-xs mb-4 text-center">BORDERLAND ACTIVATIONS</h3>
+                <div className="mb-4 pb-4 border-b-2 border-red-500/50">
+                  <p className="arcade-font text-white/90 text-[0.5rem] text-center flex items-center justify-center gap-1">
+                    <span className="text-red-400 font-bold">Featured:</span> 
+                    <a 
+                      href="https://forms.gle/Z5hLqvVyqFHWGZu29"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-green-400 transition-colors cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Pier 70
+                    </a>
+                  </p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full arcade-font text-[0.5rem]">
+                    <thead>
+                      <tr className="border-b-2 border-red-500/50">
+                        <th className="text-center text-white/90 py-2 px-2">Activation</th>
+                        <th className="text-center text-white/90 py-2 px-2">Status</th>
+                        <th className="text-center text-white/90 py-2 px-2">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {activations.map((activation, index) => (
+                        <tr 
+                          key={index} 
+                          className={`border-b border-red-500/20 transition-colors hover:bg-red-500/20 ${
+                            activation.link ? 'cursor-pointer' : ''
+                          }`}
+                          onClick={(e) => {
+                            if (activation.link) {
+                              window.open(activation.link, '_blank', 'noopener,noreferrer');
+                            }
+                          }}
+                        >
+                          <td className="text-white/90 py-3 px-3">{activation.name}</td>
+                          <td className="text-white/90 py-3 px-3">
+                            <span className={`${
+                              activation.status === "Scheduled" ? "text-blue-400" :
+                              activation.status === "Concluded" ? "text-amber-400" :
+                              activation.status === "Open" ? "text-green-400" :
+                              "text-white/70"
+                            }`}>
+                              {activation.status}
+                            </span>
+                          </td>
+                          <td className="py-3 px-3">
+                            {activation.link && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  window.open(activation.link, '_blank', 'noopener,noreferrer');
+                                }}
+                                className={`arcade-font text-[0.5rem] flex items-center justify-center px-3 py-1 border-2 shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer w-[90px] ${
+                                  activation.status === "Scheduled"
+                                    ? "bg-green-500 text-green-950 border-green-400 shadow-green-500/60"
+                                    : activation.status === "Concluded"
+                                    ? "bg-zinc-800 text-zinc-400 border-zinc-700"
+                                    : "bg-primary text-white border-primary shadow-primary/60"
+                                }`}
+                                style={{
+                                  boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                                }}
+                              >
+                                {activation.status === "Scheduled" ? "PLAY" : activation.status === "Concluded" ? "RESULTS" : "PLAY"}
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="mt-6 flex justify-center">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const mailtoLink = document.createElement('a');
+                      mailtoLink.href = 'mailto:sidequesterpix@gmail.com?subject=Host a Game';
+                      mailtoLink.click();
+                    }}
+                    className="arcade-font text-[0.5rem] flex items-center gap-1 px-4 py-2 bg-zinc-800 border-2 border-zinc-700 text-white shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer"
+                    style={{
+                      boxShadow: 'inset 0 -3px 5px rgba(0,0,0,0.4)',
+                    }}>
+                    <Radio className="w-3 h-3" />
+                    <span>HOST</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
-        </>
-      )}
+        </div>
+      );
+    }
+    return (
+      <div>
+        <a href={link} target="_blank" rel="noopener noreferrer" className="game-card-link block no-underline focus:outline-none focus:ring-0 hover:no-underline text-inherit [&>*]:text-inherit [&>*]:hover:text-inherit [&_*]:!text-inherit">
+          {cardContent}
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {cardContent}
     </div>
   );
 }
