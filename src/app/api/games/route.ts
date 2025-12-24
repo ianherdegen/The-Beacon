@@ -4,7 +4,7 @@ export async function GET() {
   const games = [
     {
       title: "BORDERLAND",
-      status: "Open"
+      status: "LOCKED"
     },
     {
       title: "SURVIVOR",

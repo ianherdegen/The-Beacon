@@ -44,7 +44,7 @@ export function GameCard({ title, status, image, link, quarter, featured = false
     if (isComingSoon) {
       return "bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-700";
     }
-    if (isBorderland) {
+    if (isBorderland && !isComingSoon) {
       return "bg-gradient-to-r from-red-500/90 via-red-400/80 to-red-500/90";
     }
     if (isConcluded) {
@@ -153,7 +153,7 @@ export function GameCard({ title, status, image, link, quarter, featured = false
   const cardContent = (
     <div className="group relative">
       {/* Arcade Cabinet Body */}
-      <div className={`relative bg-black border-8 ${cardBorderClass} shadow-2xl transition-all duration-300 hover:scale-[1.02] ${isBorderland ? 'hover:border-red-500' : isConcluded ? 'hover:border-amber-500' : ''}`}
+      <div className={`relative bg-black border-8 ${cardBorderClass} shadow-2xl transition-all duration-300 hover:scale-[1.02] ${isBorderland && !isComingSoon ? 'hover:border-red-500' : isConcluded ? 'hover:border-amber-500' : ''}`}
         style={{
           background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
         }}>
@@ -176,7 +176,7 @@ export function GameCard({ title, status, image, link, quarter, featured = false
         <div className={`relative ${marqueeGradient} p-4 border-b-4 ${
           isComingSoon
             ? 'border-zinc-700'
-            : isBorderland
+            : isBorderland && !isComingSoon
               ? 'border-red-500'
               : isConcluded
                 ? 'border-amber-500'

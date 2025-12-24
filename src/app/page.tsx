@@ -21,10 +21,9 @@ export default function Home() {
   const games = [
     {
       title: "BORDERLAND",
-      status: "Open",
+      status: "LOCKED",
       quarter: "Q4 2025",
-      image: "/images/Borderland.png",
-      link: "https://borderland.thebeaconhq.com"
+      image: "/images/Borderland.png"
     },
     {
       title: "SURVIVOR",
