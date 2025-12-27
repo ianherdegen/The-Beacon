@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Circle, Play, RefreshCcw, Copy, Radio, Trophy, UserPlus, Lock, X } from "lucide-react";
 
@@ -243,10 +244,11 @@ export function GameCard({ title, status, image, link, quarter, featured = false
             }}>
             {/* CRT Screen */}
             <div className="relative aspect-[4/3] bg-black">
-              <img 
+              <Image 
                 src={image}
                 alt={title}
-                className={`w-full h-full object-cover ${imageEffectClass}`}
+                fill
+                className={`object-cover ${imageEffectClass}`}
               />
               {/* Scanlines */}
               <div className="absolute inset-0 pointer-events-none opacity-15"

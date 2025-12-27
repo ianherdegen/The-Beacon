@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
 
 interface VideoModalProps {
@@ -11,12 +11,12 @@ interface VideoModalProps {
 export function VideoModal({ youtubeId, onClose }: VideoModalProps) {
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
       onClose();
     }, 200); // Match animation duration
-  };
+  }, [onClose]);
 
   // Close on Escape key
   useEffect(() => {
@@ -27,7 +27,7 @@ export function VideoModal({ youtubeId, onClose }: VideoModalProps) {
     };
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
-  }, []);
+  }, [handleClose]);
 
   return (
     <div

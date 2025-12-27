@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { GameCard } from "./GameCard";
 import { ChevronLeft, ChevronRight, X, Radio, Play, Trophy } from "lucide-react";
 
@@ -34,7 +35,31 @@ export function GameCarousel({ games }: GameCarouselProps) {
     return index % games.length;
   };
 
-  const handleInfiniteLoop = (currentIndex: number) => {
+  const scrollToIndex = useCallback((index: number, smooth = true) => {
+    if (!scrollRef.current || !itemRefs.current[index]) return;
+    
+    const container = scrollRef.current;
+    const item = itemRefs.current[index];
+    
+    if (!item) return;
+    
+    isScrollingRef.current = true;
+    
+    const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+    const containerCenter = container.clientWidth / 2;
+    const scrollTo = itemCenter - containerCenter;
+    
+    container.scrollTo({
+      left: scrollTo,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, smooth ? 500 : 0);
+  }, []);
+
+  const handleInfiniteLoop = useCallback((currentIndex: number) => {
     if (!scrollRef.current) return;
 
     // If in first set (indices 0 to games.length-1), jump to middle set
@@ -49,7 +74,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
       scrollToIndex(targetIndex, false);
       setCenterIndex(targetIndex);
     }
-  };
+  }, [games.length, scrollToIndex]);
 
   const updateCenterIndex = useCallback(() => {
     if (!scrollRef.current || isScrollingRef.current) return;
@@ -93,31 +118,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
     scrollTimeoutRef.current = setTimeout(() => {
       handleInfiniteLoop(closestIndex);
     }, 150);
-  }, [games.length, handleInfiniteLoop]);
-
-  const scrollToIndex = useCallback((index: number, smooth = true) => {
-    if (!scrollRef.current || !itemRefs.current[index]) return;
-    
-    const container = scrollRef.current;
-    const item = itemRefs.current[index];
-    
-    if (!item) return;
-    
-    isScrollingRef.current = true;
-    
-    const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-    const containerCenter = container.clientWidth / 2;
-    const scrollTo = itemCenter - containerCenter;
-    
-    container.scrollTo({
-      left: scrollTo,
-      behavior: smooth ? 'smooth' : 'auto'
-    });
-
-    setTimeout(() => {
-      isScrollingRef.current = false;
-    }, smooth ? 500 : 0);
-  }, []);
+  }, [handleInfiniteLoop]);
 
   const handlePrevious = () => {
     const newIndex = centerIndex - 1;
@@ -195,11 +196,12 @@ export function GameCarousel({ games }: GameCarouselProps) {
         <div className="grid grid-cols-2 gap-3">
           {games.map((game, index) => (
             <div key={index} className="flex flex-col items-center p-3 bg-zinc-900/50 border border-zinc-700 rounded-lg backdrop-blur-sm">
-              <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 mb-2">
-                <img 
+              <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 mb-2 relative">
+                <Image 
                   src={game.image}
                   alt={game.title}
-                  className={`w-full h-full object-cover ${
+                  fill
+                  className={`object-cover ${
                     game.status === "LOCKED" 
                       ? 'grayscale opacity-70' 
                       : ''

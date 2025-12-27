@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { ArrowLeft, Calendar, Trophy } from 'lucide-react'
 
 interface PlayerProfilePageProps {
-  params: {
+  params: Promise<{
     playerId: string
-  }
+  }>
 }
 
-export default function PlayerProfile({ params }: PlayerProfilePageProps) {
-  const { playerId } = params
+export default async function PlayerProfile({ params }: PlayerProfilePageProps) {
+  const { playerId } = await params
 
   // Mock player data - in a real app, this would be fetched based on playerId
   const playerData: Record<string, {

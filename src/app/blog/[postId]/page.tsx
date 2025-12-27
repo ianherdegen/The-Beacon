@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { ArrowLeft, Calendar } from 'lucide-react'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     postId: string
-  }
+  }>
 }
 
-export default function BlogPost({ params }: BlogPostPageProps) {
-  const { postId } = params
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { postId } = await params
 
   // Blog posts data with full content
   const blogPosts: Record<string, {
@@ -28,7 +28,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I need your help for The Beacon's first <span className="font-semibold">"Blockbuster" Game</span>.
+            I need your help for The Beacon&apos;s first <span className="font-semibold">&quot;Blockbuster&quot; Game</span>.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
             <span className="font-semibold">Borderland | Summer 2026</span>
@@ -117,14 +117,14 @@ export default function BlogPost({ params }: BlogPostPageProps) {
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            In October, I ran a month-long live play-test for The Beacon at the Russell Industrial Center in Detroit. The game was called Borderland, directly inspired by Netflix's AIB.
+            In October, I ran a month-long live play-test for The Beacon at the Russell Industrial Center in Detroit. The game was called Borderland, directly inspired by Netflix&apos;s AIB.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
             THE BORDERLAND PLAYTEST
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Borderland was a hyperlocal, real-world survival tournament. Players competed in live challenges to extend their <span className="font-semibold">"Visa ⏳"</span>, their right to remain in the game. Every 3 days, players had to complete at least 1 game or they were automatically eliminated. Visa countdowns were visible publicly, and players received warnings before expiration.
+            Borderland was a hyperlocal, real-world survival tournament. Players competed in live challenges to extend their <span className="font-semibold">&quot;Visa ⏳&quot;</span>, their right to remain in the game. Every 3 days, players had to complete at least 1 game or they were automatically eliminated. Visa countdowns were visible publicly, and players received warnings before expiration.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
@@ -138,7 +138,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             Game Types
           </h3>
           <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
-            <li><span className="font-semibold">🕹️ Solo Games:</span> Individual missions or 1-on-1 challenges against a "Borderland Citizen"</li>
+            <li><span className="font-semibold">🕹️ Solo Games:</span> Individual missions or 1-on-1 challenges against a &quot;Borderland Citizen&quot;</li>
             <li><span className="font-semibold">⚔️ Versus Games:</span> Head-to-head competition where only some survived</li>
             <li><span className="font-semibold">🤝 Group Games:</span> Team-based trials where everyone lived or everyone was eliminated</li>
           </ul>
@@ -151,7 +151,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             WHAT STOOD OUT
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            What stood out wasn't just the gameplay, but the stories. "Near-death moments", psychological strategy, funny failures, and genuinely human connections between strangers. The game evolved as players learned how to play it together.
+            What stood out wasn&apos;t just the gameplay, but the stories. &quot;Near-death moments&quot;, psychological strategy, funny failures, and genuinely human connections between strangers. The game evolved as players learned how to play it together.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
             That experiment led directly to The Beacon - a public platform for <span className="font-semibold">Hyperlocal Live Games</span>, real-world gaming experiences where cities, neighborhoods, and everyday spaces become the arena. Instead of screens separating people, Beacon connects players face-to-face through live challenges powered by simple digital systems.
@@ -184,7 +184,7 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             BLOCKBUSTER GAMES
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Alongside creator-built games, I'm also planning to produce official Beacon "<span className="font-semibold">Blockbuster</span>" Games twice a year. These will set the standard and provide templates others can replicate in their own communities.
+            Alongside creator-built games, I&apos;m also planning to produce official Beacon &quot;<span className="font-semibold">Blockbuster</span>&quot; Games twice a year. These will set the standard and provide templates others can replicate in their own communities.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
@@ -237,17 +237,17 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             THE PROBLEM WITH MODERN COMMUNITY
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I've been thinking a lot about how hard it's become to find community in the real world. Many social spaces feel unintentionally gate-kept - by money, skill level, or just knowing the "right" people. And when there is more friction in joining a group than paying $10/month for an OnlyFans model to acknowledge your existence… well, something in our society is off (no disrespect to the OF models out there - get the bag).
+            I&apos;ve been thinking a lot about how hard it&apos;s become to find community in the real world. Many social spaces feel unintentionally gate-kept - by money, skill level, or just knowing the &quot;right&quot; people. And when there is more friction in joining a group than paying $10/month for an OnlyFans model to acknowledge your existence… well, something in our society is off (no disrespect to the OF models out there - get the bag).
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
             ONE SMALL IDEA
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I don't know if I can fix the world, but I do think I can contribute one small idea.
+            I don&apos;t know if I can fix the world, but I do think I can contribute one small idea.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I've been building something called <a href="https://thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">The Beacon</a> - a platform for hyperlocal live games that anyone can host. Think: real-world games inspired by blockbusters like Alice in Borderland or Survivor, but safe, creative, and made by regular people using templates.
+            I&apos;ve been building something called <a href="https://thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">The Beacon</a> - a platform for hyperlocal live games that anyone can host. Think: real-world games inspired by blockbusters like Alice in Borderland or Survivor, but safe, creative, and made by regular people using templates.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
@@ -261,21 +261,21 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             Early Testing
           </h3>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            We tested a small 17-player version in Detroit, and what surprised me wasn't just that people enjoyed it - it was that several immediately wanted to host their own. <span className="font-semibold">That felt like a signal that this might matter.</span>
+            We tested a small 17-player version in Detroit, and what surprised me wasn&apos;t just that people enjoyed it - it was that several immediately wanted to host their own. <span className="font-semibold">That felt like a signal that this might matter.</span>
           </p>
 
           <h3 className="arcade-title text-[0.7rem] sm:text-[0.8rem] text-accent mb-3 mt-6">
             What Makes It Different
           </h3>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Despite major top-down investments in immersive gaming - even <a href="https://finance.yahoo.com/news/gaming-become-next-revenue-pillar-183400667.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAIBgHPh2eQdtarY5zCnOpMnB10Z0esCapd16lOpGgVe08x6vmCosBKQFuOa7M65nwX1ZJi9AoDz1-UqP5sTtP2AaOWJQaYlO8I2VHXHZT0sSLEE_R0KakbBI-jeUS0nGsWSLtDdOfUhC9vg2RFz3iZRCQRiOjG_TJaN6YXjnpEjp" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">billions from companies like Netflix</a> - <span className="font-semibold">player-generated, community-driven games are still rare.</span> That's what feels truly new.
+            Despite major top-down investments in immersive gaming - even <a href="https://finance.yahoo.com/news/gaming-become-next-revenue-pillar-183400667.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAIBgHPh2eQdtarY5zCnOpMnB10Z0esCapd16lOpGgVe08x6vmCosBKQFuOa7M65nwX1ZJi9AoDz1-UqP5sTtP2AaOWJQaYlO8I2VHXHZT0sSLEE_R0KakbBI-jeUS0nGsWSLtDdOfUhC9vg2RFz3iZRCQRiOjG_TJaN6YXjnpEjp" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">billions from companies like Netflix</a> - <span className="font-semibold">player-generated, community-driven games are still rare.</span> That&apos;s what feels truly new.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
             A HUMBLE ASK
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I'm humbled by how much I still don't know. I'm here to learn, to grow this concept thoughtfully, and to contribute something positive. If this resonates - I'd love to connect.
+            I&apos;m humbled by how much I still don&apos;t know. I&apos;m here to learn, to grow this concept thoughtfully, and to contribute something positive. If this resonates - I&apos;d love to connect.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
             Thank you for reading this far. Truly.
@@ -285,10 +285,10 @@ export default function BlogPost({ params }: BlogPostPageProps) {
             P.S. THE THIRD DOOR
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Sometimes you have to find the "third door" to get noticed, so I set up a Banksy-style display at the YC office. I couldn't resist taking a page from Apoorva Mehta's playbook - after all, <a href="https://techcrunch.com/2012/08/18/how-instacart-hacked-yc/" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">he once delivered a case of beer to Garry Tan to showcase Instacart</a>.
+            Sometimes you have to find the &quot;third door&quot; to get noticed, so I set up a Banksy-style display at the YC office. I couldn&apos;t resist taking a page from Apoorva Mehta&apos;s playbook - after all, <a href="https://techcrunch.com/2012/08/18/how-instacart-hacked-yc/" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">he once delivered a case of beer to Garry Tan to showcase Instacart</a>.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Maybe don't try this at home, but do enjoy the video.
+            Maybe don&apos;t try this at home, but do enjoy the video.
           </p>
           
           {/* YouTube Short Embed */}

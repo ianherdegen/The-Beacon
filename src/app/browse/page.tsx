@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Upload, Lock } from 'lucide-react'
 
 export default function BrowseGames() {
@@ -102,11 +103,12 @@ export default function BrowseGames() {
                   
                   <div className="relative">
                     {/* Game Image */}
-                    <div className="aspect-[3/4] bg-black overflow-hidden">
-                      <img
+                    <div className="aspect-[3/4] bg-black overflow-hidden relative">
+                      <Image
                         src={game.image}
                         alt={game.title}
-                        className="w-full h-full object-cover grayscale opacity-70"
+                        fill
+                        className="object-cover grayscale opacity-70"
                       />
                     </div>
                     
