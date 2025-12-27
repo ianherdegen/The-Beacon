@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import GoogleAnalytics from '@/components/GoogleAnalytics'
+import { Navbar } from '@/components/Navbar'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'The Beacon HQ',
@@ -41,7 +43,18 @@ export default function RootLayout({
       </head>
       <body>
         <GoogleAnalytics />
-        {children}
+        <div className="min-h-screen bg-black flex flex-col">
+          {/* Arcade Floor Pattern */}
+          <div className="fixed inset-0 opacity-5 pointer-events-none z-0" style={{
+            backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255, 255, 255, 0.03) 60px, rgba(255, 255, 255, 0.03) 61px),
+                             repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255, 255, 255, 0.03) 60px, rgba(255, 255, 255, 0.03) 61px)`
+          }} />
+          <Navbar />
+          <main className="flex-1 relative z-10">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )

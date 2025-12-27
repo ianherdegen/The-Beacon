@@ -20,6 +20,8 @@ export function GameCarousel({ games }: GameCarouselProps) {
   const [centerIndex, setCenterIndex] = useState(games.length); // Start at Borderland (first item) of middle set
   const [isMobileLandscape, setIsMobileLandscape] = useState(false);
   const [openModalIndex, setOpenModalIndex] = useState<number | null>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isScrollingRef = useRef(false);
@@ -54,6 +56,16 @@ export function GameCarousel({ games }: GameCarouselProps) {
     
     const container = scrollRef.current;
     const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    
+    // Update scroll indicators
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    const isAtStart = scrollLeft < 50;
+    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 50;
+    
+    setShowLeftArrow(!isAtStart);
+    setShowRightArrow(!isAtEnd);
     
     let closestIndex = 0;
     let closestDistance = Infinity;
@@ -145,6 +157,21 @@ export function GameCarousel({ games }: GameCarouselProps) {
       window.removeEventListener('orientationchange', checkMobileLandscape);
     };
   }, []);
+
+  // Initialize scroll indicators on mount
+  useEffect(() => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
+      const isAtStart = scrollLeft < 50;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 50;
+      
+      setShowLeftArrow(!isAtStart);
+      setShowRightArrow(!isAtEnd);
+    }
+  }, [games.length]);
 
   useEffect(() => {
     // Initialize to Borderland (first item) of middle set after a short delay
@@ -431,17 +458,56 @@ export function GameCarousel({ games }: GameCarouselProps) {
       </button>
 
       {/* Scrollable Game Container */}
-      <div
-        ref={scrollRef}
-        onScroll={updateCenterIndex}
-        className="flex-1 flex gap-4 lg:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide items-center"
-        style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          scrollPaddingLeft: '50%',
-          scrollPaddingRight: '50%',
-        }}
-      >
+      <div className="relative flex-1 flex items-center">
+        {/* Left Scroll Indicator */}
+        {showLeftArrow && (
+          <button
+            onClick={handlePrevious}
+            className="absolute left-0 sm:left-2 z-20 md:hidden p-2 hover:scale-110 transition-transform cursor-pointer"
+            aria-label="Scroll left"
+          >
+            <div className="relative">
+              <ChevronLeft className="w-8 h-8 text-white drop-shadow-lg" style={{
+                animation: 'bounce-horizontal 1.5s ease-in-out infinite',
+                filter: 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.8))'
+              }} />
+              <ChevronLeft className="w-8 h-8 text-white absolute inset-0 opacity-40 blur-md" style={{
+                animation: 'bounce-horizontal 1.5s ease-in-out infinite 0.2s'
+              }} />
+            </div>
+          </button>
+        )}
+        
+        {/* Right Scroll Indicator */}
+        {showRightArrow && (
+          <button
+            onClick={handleNext}
+            className="absolute right-0 sm:right-2 z-20 md:hidden p-2 hover:scale-110 transition-transform cursor-pointer"
+            aria-label="Scroll right"
+          >
+            <div className="relative">
+              <ChevronRight className="w-8 h-8 text-white drop-shadow-lg" style={{
+                animation: 'bounce-horizontal 1.5s ease-in-out infinite',
+                filter: 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.8))'
+              }} />
+              <ChevronRight className="w-8 h-8 text-white absolute inset-0 opacity-40 blur-md" style={{
+                animation: 'bounce-horizontal 1.5s ease-in-out infinite 0.2s'
+              }} />
+            </div>
+          </button>
+        )}
+        
+        <div
+          ref={scrollRef}
+          onScroll={updateCenterIndex}
+          className="flex-1 flex gap-4 lg:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide items-center"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            scrollPaddingLeft: '50%',
+            scrollPaddingRight: '50%',
+          }}
+        >
         {/* Left spacer for proper centering */}
         <div className="flex-shrink-0 w-[calc(50vw-37.5vw)] lg:w-[calc(50vw-200px)]" />
         
@@ -471,6 +537,7 @@ export function GameCarousel({ games }: GameCarouselProps) {
         
         {/* Right spacer for proper centering */}
         <div className="flex-shrink-0 w-[calc(50vw-37.5vw)] lg:w-[calc(50vw-200px)]" />
+        </div>
       </div>
 
       {/* Indicator Dots */}
@@ -495,6 +562,14 @@ export function GameCarousel({ games }: GameCarouselProps) {
       <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
+        }
+        @keyframes bounce-horizontal {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(8px);
+          }
         }
       `}</style>
     </div>
