@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function Blog() {
       date: "December 24, 2025",
       author: "Pixasso",
       excerpt: "We're building Borderland as a tightly curated 4-hour live game, and we need game designers, partners, volunteers, vendors, and game creators to help make it epic.",
+      headerImage: "/images/blog/blog-3-header.jpg",
     },
     {
       id: 2,
@@ -23,6 +25,7 @@ export default function Blog() {
       date: "December 18, 2025",
       author: "Pixasso",
       excerpt: "A month-long survival tournament in Detroit. Players competed in live challenges, but what emerged was stories, strategy, and genuine human connections.",
+      headerImage: "/images/blog/blog-2-header.jpg",
     },
     {
       id: 1,
@@ -30,6 +33,7 @@ export default function Blog() {
       date: "December 9, 2025",
       author: "Pixasso",
       excerpt: "When joining a group has more friction than paying for OnlyFans, something's broken. The Beacon: hyperlocal live games that let strangers become equals through play.",
+      headerImage: "/images/blog/blog-header-1.jpg",
     },
   ]
 
@@ -58,7 +62,7 @@ export default function Blog() {
                 backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
               }} />
               
-              <div className="relative space-y-4">
+              <div className="relative space-y-5 sm:space-y-6">
                 {/* Title */}
                 <Link href={`/blog/${post.id}`}>
                   <h3 className="arcade-title text-[0.8rem] sm:text-[1rem] text-accent hover:text-primary transition-colors cursor-pointer">
@@ -66,8 +70,24 @@ export default function Blog() {
                   </h3>
                 </Link>
 
+                {/* Header Image */}
+                <Link href={`/blog/${post.id}`} className="block">
+                  <div className="relative w-full aspect-video bg-zinc-800 border-2 border-zinc-700 overflow-hidden hover:border-primary transition-all duration-300">
+                    <Image
+                      src={post.headerImage}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Scan Line Effect Overlay */}
+                    <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                      backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
+                    }} />
+                  </div>
+                </Link>
+
                 {/* Meta Info */}
-                <div className="flex flex-wrap gap-4 sm:gap-6">
+                <div className="flex flex-wrap gap-4 sm:gap-6 pt-1">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3 h-3 text-zinc-500" />
                     <span className="arcade-font text-[0.5rem] text-zinc-500">
@@ -80,17 +100,19 @@ export default function Blog() {
                 </div>
 
                 {/* Excerpt */}
-                <p className="text-base text-zinc-300 leading-relaxed">
+                <p className="text-base text-zinc-300 leading-relaxed pt-2">
                   {post.excerpt}
                 </p>
 
                 {/* Read More Button */}
-                <Link 
-                  href={`/blog/${post.id}`}
-                  className="arcade-font text-[0.5rem] px-4 py-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-black transition-all duration-300 inline-block"
-                >
-                  READ MORE
-                </Link>
+                <div className="pt-2">
+                  <Link 
+                    href={`/blog/${post.id}`}
+                    className="arcade-font text-[0.5rem] px-4 py-2 border-2 border-secondary text-secondary hover:bg-secondary hover:text-black transition-all duration-300 inline-block"
+                  >
+                    READ MORE
+                  </Link>
+                </div>
 
                 {/* Decorative pixels */}
                 <div className="flex gap-1 pt-2">

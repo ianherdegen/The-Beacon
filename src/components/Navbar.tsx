@@ -12,8 +12,8 @@ export function Navbar() {
   const navItems = [
     { path: '/', label: 'HOME' },
     { path: '/browse', label: 'BROWSE' },
-    { path: '/blog', label: 'BLOG' },
     { path: '/scoreboard', label: 'SCOREBOARD' },
+    { path: '/blog', label: 'BLOG' },
   ]
   
   const isActive = (path: string) => {

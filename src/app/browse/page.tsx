@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Upload, Lock } from 'lucide-react'
+import { Upload, Lock, X } from 'lucide-react'
 
 export default function BrowseGames() {
   const [activeTab, setActiveTab] = useState<'blockbusters' | 'community'>('community')
+  const [showSubmitModal, setShowSubmitModal] = useState(false)
 
   const blockbusterGames = [
     {
@@ -174,14 +175,71 @@ export default function BrowseGames() {
           <div className="max-w-2xl mx-auto">
             {/* Submit Game Button */}
             <div className="flex justify-center mb-12">
-              <a
-                href="mailto:sidequesterpix@gmail.com?subject=Game Submission"
+              <button
+                onClick={() => setShowSubmitModal(true)}
                 className="arcade-font text-[0.6rem] sm:text-[0.7rem] px-6 py-4 bg-gradient-to-r from-accent to-secondary text-black border-4 border-white/20 hover:scale-105 transition-all duration-300 shadow-lg shadow-accent/50 hover:shadow-secondary/50 flex items-center gap-3"
               >
                 <Upload className="w-4 h-4" />
                 SUBMIT YOUR GAME
-              </a>
+              </button>
             </div>
+
+            {/* Submit Confirmation Modal */}
+            {showSubmitModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                <div className="bg-zinc-900 border-4 border-zinc-700 p-8 max-w-md w-full relative">
+                  {/* Scan Line Effect */}
+                  <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                    backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
+                  }} />
+                  
+                  <div className="relative">
+                    {/* Close Button */}
+                    <button
+                      onClick={() => setShowSubmitModal(false)}
+                      className="absolute top-0 right-0 text-zinc-400 hover:text-white transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+
+                    <h3 className="arcade-title text-[0.9rem] sm:text-[1rem] text-accent mb-6">
+                      BEFORE YOU SUBMIT
+                    </h3>
+                    
+                    <div className="space-y-3 mb-8 text-sm text-zinc-300">
+                      <p className="flex items-start gap-2">
+                        <span className="text-accent mt-1">▸</span>
+                        <span>Your game rules are clearly defined</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-accent mt-1">▸</span>
+                        <span>You&apos;ve successfully playtested your game</span>
+                      </p>
+                      <p className="flex items-start gap-2">
+                        <span className="text-accent mt-1">▸</span>
+                        <span>You agree to provide support to players and hosts</span>
+                      </p>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => setShowSubmitModal(false)}
+                        className="flex-1 px-4 py-2 border-2 border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors text-sm"
+                      >
+                        Cancel
+                      </button>
+                      <a
+                        href="mailto:sidequesterpix@gmail.com?subject=Game Submission"
+                        onClick={() => setShowSubmitModal(false)}
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-accent to-secondary text-black border-2 border-transparent hover:scale-105 transition-all duration-300 text-sm font-medium text-center"
+                      >
+                        Submit
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Empty State - Your Game Could Be Here */}
             <div className="bg-zinc-900 border-4 border-dashed border-zinc-700 p-12 sm:p-16 text-center relative">

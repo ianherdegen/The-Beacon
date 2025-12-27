@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowLeft, Calendar } from 'lucide-react'
 
 interface BlogPostPageProps {
@@ -17,6 +18,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     date: string
     author: string
     excerpt: string
+    headerImage: string
     content: React.ReactNode
   }> = {
     "3": {
@@ -25,6 +27,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       date: "December 24, 2025",
       author: "Pixasso",
       excerpt: "We're building Borderland as a tightly curated 4-hour live game, and we need game designers, partners, volunteers, vendors, and game creators to help make it epic.",
+      headerImage: "/images/blog/blog-3-header.jpg", // Recommended size: 1200x630px (16:9 aspect ratio)
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
@@ -114,6 +117,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       date: "December 18, 2025",
       author: "Pixasso",
       excerpt: "A month-long survival tournament in Detroit. Players competed in live challenges, but what emerged was stories, strategy, and genuine human connections.",
+      headerImage: "/images/blog/blog-2-header.jpg", // Recommended size: 1200x630px (16:9 aspect ratio)
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
@@ -231,6 +235,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       date: "December 9, 2025",
       author: "Pixasso",
       excerpt: "When joining a group has more friction than paying for OnlyFans, something's broken. The Beacon: hyperlocal live games that let strangers become equals through play.",
+      headerImage: "/images/blog/blog-header-1.jpg", // Recommended size: 1200x630px (16:9 aspect ratio)
       content: (
         <>
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
@@ -350,6 +355,21 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             <h1 className="arcade-title text-[1rem] sm:text-[1.2rem] md:text-[1.5rem] text-accent">
               {post.title}
             </h1>
+
+            {/* Header Image */}
+            <div className="relative w-full aspect-video bg-zinc-800 border-2 border-zinc-700 overflow-hidden">
+              <Image
+                src={post.headerImage}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Scan Line Effect Overlay */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
+              }} />
+            </div>
 
             {/* Meta Info */}
             <div className="flex flex-wrap gap-4 sm:gap-6 pb-6 border-b-2 border-zinc-800">
