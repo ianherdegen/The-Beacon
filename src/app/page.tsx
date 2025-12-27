@@ -7,25 +7,21 @@ export default function Home() {
     {
       title: "BORDERLAND",
       status: "LOCKED",
-      quarter: "Q4 2025",
       image: "/images/Borderland.png"
     },
     {
       title: "SURVIVOR",
       status: "LOCKED",
-      quarter: "Q2 2026",
       image: "/images/Survivor.png"
     },
     {
       title: "SQUID GAME",
       status: "LOCKED",
-      quarter: "Q3 2026",
       image: "/images/SquidGame.png"
     },
     {
       title: "AMAZING RACE",
       status: "LOCKED",
-      quarter: "Q4 2026",
       image: "/images/AmazingRace.png"
     }
   ];

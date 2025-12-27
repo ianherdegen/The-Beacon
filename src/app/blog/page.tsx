@@ -19,7 +19,7 @@ export default function Blog() {
     },
     {
       id: 2,
-      title: "I RAN A REAL WORLD ALICE IN BORDERLAND GAME",
+      title: "WE RAN A REAL WORLD ALICE IN BORDERLAND GAME",
       date: "December 18, 2025",
       author: "Pixasso",
       excerpt: "A month-long survival tournament in Detroit. Players competed in live challenges, but what emerged was stories, strategy, and genuine human connections.",

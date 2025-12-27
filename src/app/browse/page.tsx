@@ -11,25 +11,21 @@ export default function BrowseGames() {
     {
       title: "BORDERLAND",
       status: "LOCKED",
-      quarter: "Q4 2025",
       image: "/images/Borderland.png"
     },
     {
       title: "SURVIVOR",
       status: "LOCKED",
-      quarter: "Q2 2026",
       image: "/images/Survivor.png"
     },
     {
       title: "SQUID GAME",
       status: "LOCKED",
-      quarter: "Q3 2026",
       image: "/images/SquidGame.png"
     },
     {
       title: "AMAZING RACE",
       status: "LOCKED",
-      quarter: "Q4 2026",
       image: "/images/AmazingRace.png"
     }
   ]
@@ -90,14 +86,14 @@ export default function BrowseGames() {
           const maxSkeletons = Math.max(mobileSkeletons, tabletSkeletons, desktopSkeletons);
           
           return (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {blockbusterGames.map((game, index) => (
                 <div
                   key={index}
-                  className="bg-zinc-900 border-2 border-zinc-700 hover:border-zinc-600 transition-all duration-300 overflow-hidden relative"
+                  className="bg-zinc-900 border-4 border-zinc-700 hover:border-primary transition-all duration-300 overflow-hidden relative group cursor-pointer"
                 >
                   {/* Scan Line Effect */}
-                  <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                  <div className="absolute inset-0 opacity-10 pointer-events-none z-10" style={{
                     backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
                   }} />
                   
@@ -108,23 +104,22 @@ export default function BrowseGames() {
                         src={game.image}
                         alt={game.title}
                         fill
-                        className="object-cover grayscale opacity-70"
+                        className="object-cover grayscale opacity-70 group-hover:opacity-90 group-hover:grayscale-0 transition-all duration-300"
                       />
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60" />
                     </div>
                     
                     {/* Game Info */}
-                    <div className="p-2 space-y-1.5">
-                      <h3 className="arcade-title text-[0.45rem] sm:text-[0.5rem] text-white leading-tight">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-900/95 via-zinc-900/80 to-transparent">
+                      <h3 className="arcade-title text-[0.5rem] sm:text-[0.6rem] text-white leading-tight mb-2 group-hover:text-primary transition-colors">
                         {game.title}
                       </h3>
                       
                       <div className="flex items-center justify-between">
-                        <span className="arcade-font text-[0.35rem] sm:text-[0.4rem] text-zinc-400">
-                          {game.quarter}
-                        </span>
-                        <div className="flex items-center gap-0.5 text-zinc-500">
-                          <Lock className="w-2 h-2" />
-                          <span className="arcade-font text-[0.35rem] sm:text-[0.4rem]">LOCKED</span>
+                        <div className="flex items-center gap-1.5 text-zinc-400 group-hover:text-zinc-300 transition-colors">
+                          <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          <span className="arcade-font text-[0.4rem] sm:text-[0.45rem]">LOCKED</span>
                         </div>
                       </div>
                     </div>
@@ -148,26 +143,23 @@ export default function BrowseGames() {
                       showOnTablet ? 'sm:block' : 'sm:hidden'
                     } ${
                       showOnDesktop ? 'lg:block' : 'lg:hidden'
-                    } bg-zinc-900/70 border-2 border-zinc-700 border-dashed overflow-hidden relative opacity-60`}
+                    } bg-zinc-900 border-4 border-dashed border-zinc-700 opacity-50 overflow-hidden relative`}
                   >
                     {/* Scan Line Effect */}
-                    <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
+                    <div className="absolute inset-0 opacity-5 pointer-events-none z-10" style={{
                       backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px)`
                     }} />
                     
                     <div className="relative">
                       {/* Empty Image Placeholder */}
                       <div className="aspect-[3/4] bg-zinc-900 flex items-center justify-center">
-                        <div className="w-8 h-8 border-2 border-zinc-700 rounded" />
+                        <div className="w-12 h-12 border-2 border-dashed border-zinc-700 rounded opacity-50" />
                       </div>
                       
                       {/* Empty Info Placeholder */}
-                      <div className="p-2 space-y-1.5">
-                        <div className="h-3 bg-zinc-700 rounded w-3/4" />
-                        <div className="flex items-center justify-between">
-                          <div className="h-2 bg-zinc-700 rounded w-1/3" />
-                          <div className="h-2 bg-zinc-700 rounded w-1/4" />
-                        </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-900/95 via-zinc-900/80 to-transparent">
+                        <div className="h-3 bg-zinc-700 rounded w-3/4 mb-2 opacity-50" />
+                        <div className="h-2 bg-zinc-700 rounded w-1/3 opacity-50" />
                       </div>
                     </div>
                   </div>

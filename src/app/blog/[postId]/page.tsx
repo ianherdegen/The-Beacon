@@ -28,7 +28,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            I need your help for The Beacon&apos;s first <span className="font-semibold">&quot;Blockbuster&quot; Game</span>.
+            We need your help for The Beacon&apos;s first <span className="font-semibold">&quot;Blockbuster&quot; Game</span>.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
             <span className="font-semibold">Borderland | Summer 2026</span>
@@ -110,14 +110,14 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
     },
     "2": {
       id: 2,
-      title: "I RAN A REAL WORLD ALICE IN BORDERLAND GAME",
+      title: "WE RAN A REAL WORLD ALICE IN BORDERLAND GAME",
       date: "December 18, 2025",
       author: "Pixasso",
       excerpt: "A month-long survival tournament in Detroit. Players competed in live challenges, but what emerged was stories, strategy, and genuine human connections.",
       content: (
         <>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            In October, I ran a month-long live play-test for The Beacon at the Russell Industrial Center in Detroit. The game was called Borderland, directly inspired by Netflix&apos;s AIB.
+            In October, we ran a month-long live play-test for The Beacon at the Russell Industrial Center in Detroit. The game was called Borderland, directly inspired by Netflix&apos;s AIB.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
@@ -177,14 +177,14 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
             Think of it as the intersection of gaming, events, and urban exploration.
           </p>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            The Beacon is being built as a public platform. If you have a live game or real-world experience you want to share, I want it on Beacon. One might compare it to <a href="https://itch.io" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">itch.io</a>, but for live gaming. The goal is to make publishing, hosting, and replicating IRL games as frictionless as possible for anyone.
+            The Beacon is being built as a public platform. If you have a live game or real-world experience you want to share, we want it on Beacon. One might compare it to <a href="https://itch.io" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">itch.io</a>, but for live gaming. The goal is to make publishing, hosting, and replicating IRL games as frictionless as possible for anyone.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
             BLOCKBUSTER GAMES
           </h2>
           <p className="mb-4 text-base text-zinc-300 leading-relaxed">
-            Alongside creator-built games, I&apos;m also planning to produce official Beacon &quot;<span className="font-semibold">Blockbuster</span>&quot; Games twice a year. These will set the standard and provide templates others can replicate in their own communities.
+            Alongside creator-built games, we&apos;re also planning to produce official Beacon &quot;<span className="font-semibold">Blockbuster</span>&quot; Games twice a year. These will set the standard and provide templates others can replicate in their own communities.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
