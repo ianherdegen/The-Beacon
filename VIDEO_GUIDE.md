@@ -137,3 +137,8 @@ You can add videos:
 4. Test locally with `yarn dev`
 5. Deploy to Vercel - videos will be served from the public folder
 
+
+
+
+
+

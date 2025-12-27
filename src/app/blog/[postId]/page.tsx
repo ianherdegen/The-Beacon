@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeft, Calendar, User } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 
 interface BlogPostPageProps {
   params: {
@@ -10,7 +10,7 @@ interface BlogPostPageProps {
 export default function BlogPost({ params }: BlogPostPageProps) {
   const { postId } = params
 
-  // Mock blog posts data with full content
+  // Blog posts data with full content
   const blogPosts: Record<string, {
     id: number
     title: string
@@ -19,293 +19,290 @@ export default function BlogPost({ params }: BlogPostPageProps) {
     excerpt: string
     content: React.ReactNode
   }> = {
-    "1": {
-      id: 1,
-      title: "INTRODUCING BEACON BLOCKBUSTERS",
-      date: "December 15, 2024",
-      author: "Beacon Team",
-      excerpt: "We're excited to announce Beacon Blockbusters - our new platform for community engagement games. Join the arcade revolution!",
+    "3": {
+      id: 3,
+      title: "HELP US BUILD BORDERLAND | SUMMER 2026",
+      date: "December 24, 2025",
+      author: "Pixasso",
+      excerpt: "We're building Borderland as a tightly curated 4-hour live game, and we need game designers, partners, volunteers, vendors, and game creators to help make it epic.",
       content: (
         <>
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            WELCOME TO THE ARCADE
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Welcome to Beacon Blockbusters, where classic arcade nostalgia meets modern community engagement! 
-            We're thrilled to introduce our revolutionary platform that brings people together through interactive gaming experiences.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            I need your help for The Beacon's first <span className="font-semibold">"Blockbuster" Game</span>.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            <span className="font-semibold">Borderland | Summer 2026</span>
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            We are building Borderland as a tightly curated 4-hour live game. <a href="https://borderland.thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Learn more about Borderland</a>.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            This one is being shaped with the community.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            OUR MISSION
+            3 ASKS
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Our mission is simple: create unforgettable moments of connection and competition within communities. 
-            Whether you're organizing events for your church, campus, workplace, or neighborhood, Beacon Blockbusters 
-            provides the tools and games to make it happen.
-          </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            WHAT TO EXPECT
+            1) GAME DESIGNERS & GAME DEVS
           </h2>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Officially designed Beacon games like Borderland</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Community-created game concepts and submissions</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Classic arcade entertainment with modern engagement tools</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Simple to understand, exciting to play, impossible to forget</span>
-            </li>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            How do we make this game as epic as possible?
+          </p>
+          <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
+            <li>You do <span className="font-semibold">NOT</span> need to know how to code</li>
+            <li>Inspired by Alice in Borderland</li>
+            <li>Physical, social, strategic, chaotic, cooperative games</li>
+            <li>Crowd-sourced ideas &gt; closed design</li>
           </ul>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            <a href="https://borderland.thebeaconhq.com/deck" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Submit your ideas here</a>.
+          </p>
 
-          <p className="mb-4 text-base text-zinc-300">
-            Stay tuned as we roll out new games, features, and community tools. The arcade revolution starts now!
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            2) PARTNERS, VOLUNTEERS, & VENDORS
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            We need people to help make the event actually happen.
+          </p>
+          <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
+            <li>Game Designers</li>
+            <li>Vendors (Food, Drink, Merch)</li>
+            <li>Production Designers (Lighting, Sound, Decor…)</li>
+            <li>Platform Developers</li>
+            <li>Social Media Marketing</li>
+          </ul>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            <a href="https://borderland.thebeaconhq.com/collaborate" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Collaborate here</a>.
+          </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            3) GAME CREATORS
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            We are running a competition for our next Beacon Blockbuster.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed font-semibold">
+            YOUR GAME CONCEPT. BEACON-LEVEL PRODUCTION.
+          </p>
+          <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
+            <li>Submit your live gaming concept</li>
+            <li>Winner gets a massive event space</li>
+            <li>Full Beacon team behind it</li>
+            <li>Players. Production. Promotion.</li>
+          </ul>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            <a href="https://borderland.thebeaconhq.com/creator-competition" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Enter the Creator Competition here</a>.
+          </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            JOIN US
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Our Borderland Playtest in Detroit proved this works.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Now we are building the version that sets the bar.
           </p>
         </>
       )
     },
     "2": {
       id: 2,
-      title: "BORDERLAND IS NOW LIVE",
-      date: "December 20, 2024",
-      author: "Beacon Team",
-      excerpt: "Our first official Beacon Blockbuster game is now live! Borderland brings mystery and strategy to your community.",
+      title: "I RAN A REAL WORLD ALICE IN BORDERLAND GAME",
+      date: "December 18, 2025",
+      author: "Pixasso",
+      excerpt: "A month-long survival tournament in Detroit. Players competed in live challenges, but what emerged was stories, strategy, and genuine human connections.",
       content: (
         <>
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            THE GAME IS LIVE
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            We're thrilled to announce that Borderland, our flagship Beacon Blockbuster game, is now officially 
-            live at <a href="https://borderland.thebeaconhq.com" className="text-accent hover:text-primary transition-colors">borderland.thebeaconhq.com</a>!
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            In October, I ran a month-long live play-test for The Beacon at the Russell Industrial Center in Detroit. The game was called Borderland, directly inspired by Netflix's AIB.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            WHAT IS BORDERLAND?
+            THE BORDERLAND PLAYTEST
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Borderland is a community-wide game of strategy, deception, and alliance-building. Players must navigate 
-            a world where trust is currency and every decision matters. The game is designed for groups of 20-100 
-            participants and runs over several days or weeks.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Borderland was a hyperlocal, real-world survival tournament. Players competed in live challenges to extend their <span className="font-semibold">"Visa ⏳"</span>, their right to remain in the game. Every 3 days, players had to complete at least 1 game or they were automatically eliminated. Visa countdowns were visible publicly, and players received warnings before expiration.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            KEY FEATURES
+            HOW THE GAME WORKED
           </h2>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Real-time gameplay with mobile-friendly interface</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Strategic alliances and betrayals</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Live scoreboard tracking</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Franchisee dashboard for game management</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Customizable rules and settings</span>
-            </li>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Each day, different Arenas activated, offering 3 types of games:
+          </p>
+
+          <h3 className="arcade-title text-[0.7rem] sm:text-[0.8rem] text-accent mb-3 mt-6">
+            Game Types
+          </h3>
+          <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
+            <li><span className="font-semibold">🕹️ Solo Games:</span> Individual missions or 1-on-1 challenges against a "Borderland Citizen"</li>
+            <li><span className="font-semibold">⚔️ Versus Games:</span> Head-to-head competition where only some survived</li>
+            <li><span className="font-semibold">🤝 Group Games:</span> Team-based trials where everyone lived or everyone was eliminated</li>
           </ul>
 
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            As the month came to a close, a final arena activated. Remaining players entered a last-player-standing Versus Game. <span className="font-semibold">1 champion emerged.</span>
+          </p>
+
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            GET STARTED
+            WHAT STOOD OUT
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Franchisees can now host Borderland games for their communities. Visit our platform to learn more about 
-            bringing this exciting experience to your group.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            What stood out wasn't just the gameplay, but the stories. "Near-death moments", psychological strategy, funny failures, and genuinely human connections between strangers. The game evolved as players learned how to play it together.
           </p>
-          <p className="mb-4 text-base text-zinc-300">
-            Get ready to test your strategy skills - Borderland awaits!
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            That experiment led directly to The Beacon - a public platform for <span className="font-semibold">Hyperlocal Live Games</span>, real-world gaming experiences where cities, neighborhoods, and everyday spaces become the arena. Instead of screens separating people, Beacon connects players face-to-face through live challenges powered by simple digital systems.
           </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            THE BEACON PLATFORM
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Hyperlocal Live Gaming means games that:
+          </p>
+
+          <h3 className="arcade-title text-[0.7rem] sm:text-[0.8rem] text-accent mb-3 mt-6">
+            Hyperlocal Live Gaming
+          </h3>
+          <ul className="mb-4 text-base text-zinc-300 leading-relaxed list-disc list-inside space-y-2 ml-4">
+            <li>Happen in real locations like parks, cafés, rooftops, and warehouses</li>
+            <li>Sync players and events live in real time</li>
+            <li>Are community-driven and locally hosted</li>
+          </ul>
+
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Think of it as the intersection of gaming, events, and urban exploration.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            The Beacon is being built as a public platform. If you have a live game or real-world experience you want to share, I want it on Beacon. One might compare it to <a href="https://itch.io" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">itch.io</a>, but for live gaming. The goal is to make publishing, hosting, and replicating IRL games as frictionless as possible for anyone.
+          </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            BLOCKBUSTER GAMES
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Alongside creator-built games, I'm also planning to produce official Beacon "<span className="font-semibold">Blockbuster</span>" Games twice a year. These will set the standard and provide templates others can replicate in their own communities.
+          </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            BORDERLAND | SUMMER 2026
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            The first is already in planning. <span className="font-semibold">Borderland | Summer 2026</span>
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            For this edition, Borderland is being designed as a tightly curated 4-hour live experience, distilling the most powerful moments of the month-long playtest into a single, high-impact event.
+          </p>
+
+          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
+            GET INVOLVED
+          </h2>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Currently looking for volunteers, game designers, sound and lighting designers, keepsake creators, food and drink vendors, and interns in social media marketing and game development.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Learn more about <a href="https://borderland.thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Borderland</a> or reach out via the inquiries page at <a href="https://thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">TheBeaconHQ.com</a>.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed font-semibold">
+            We need more real-world play.
+          </p>
+          
+          {/* YouTube Video Embed */}
+          <div className="my-6 flex justify-center">
+            <div className="w-full max-w-3xl aspect-video bg-black border-2 border-zinc-700 overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/_M3BK5rLiTo"
+                title="Borderland Playtest Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+          </div>
         </>
       )
     },
-    "3": {
-      id: 3,
-      title: "COMING SOON: SQUID GAME",
-      date: "December 22, 2024",
-      author: "Beacon Team",
-      excerpt: "Get ready for our next big release! Squid Game will challenge your community like never before.",
+    "1": {
+      id: 1,
+      title: "FINDING COMMUNITY IN THE REAL WORLD",
+      date: "December 9, 2025",
+      author: "Pixasso",
+      excerpt: "When joining a group has more friction than paying for OnlyFans, something's broken. The Beacon: hyperlocal live games that let strangers become equals through play.",
       content: (
         <>
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            THE NEXT BLOCKBUSTER
+            THE PROBLEM WITH MODERN COMMUNITY
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            The next Beacon Blockbuster is in development, and it's going to be intense! Inspired by high-stakes 
-            competition formats, our upcoming Squid Game experience will push players to their limits.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            I've been thinking a lot about how hard it's become to find community in the real world. Many social spaces feel unintentionally gate-kept - by money, skill level, or just knowing the "right" people. And when there is more friction in joining a group than paying $10/month for an OnlyFans model to acknowledge your existence… well, something in our society is off (no disrespect to the OF models out there - get the bag).
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            WHAT WE CAN SHARE
+            ONE SMALL IDEA
           </h2>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Multiple rounds of elimination-style challenges</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Team and individual competition modes</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Interactive mobile gameplay</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Dramatic reveals and plot twists</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Spectator mode for eliminated players</span>
-            </li>
-          </ul>
-
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            FEATURES & CUSTOMIZATION
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Squid Game will be our most ambitious project yet, combining physical challenges with digital tracking 
-            and scoring. Franchisees will have complete control over challenge types and difficulty levels to match 
-            their community.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            I don't know if I can fix the world, but I do think I can contribute one small idea.
+          </p>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            I've been building something called <a href="https://thebeaconhq.com" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">The Beacon</a> - a platform for hyperlocal live games that anyone can host. Think: real-world games inspired by blockbusters like Alice in Borderland or Survivor, but safe, creative, and made by regular people using templates.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            TIMELINE
+            HOW IT WORKS
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            <span className="text-accent">Expected release:</span> Early 2025
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            When people join a Beacon activation, the usual social hierarchies - backgrounds, job titles, who-knows-who - sort of fall away. Strangers become equals, teammates, explorers. The game does the connecting.
           </p>
-          <p className="mb-4 text-base text-zinc-300">
-            Stay tuned for beta testing opportunities!
+
+          <h3 className="arcade-title text-[0.7rem] sm:text-[0.8rem] text-accent mb-3 mt-6">
+            Early Testing
+          </h3>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            We tested a small 17-player version in Detroit, and what surprised me wasn't just that people enjoyed it - it was that several immediately wanted to host their own. <span className="font-semibold">That felt like a signal that this might matter.</span>
           </p>
-        </>
-      )
-    },
-    "4": {
-      id: 4,
-      title: "HOW TO CREATE YOUR OWN GAME",
-      date: "December 25, 2024",
-      author: "Community Team",
-      excerpt: "Want to create your own community game? Here's a step-by-step guide to getting started with the Beacon platform.",
-      content: (
-        <>
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            BECOME A GAME CREATOR
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Have an idea for an amazing community game? The Beacon platform makes it possible to bring your vision to life! 
-            Here's how to get started:
+
+          <h3 className="arcade-title text-[0.7rem] sm:text-[0.8rem] text-accent mb-3 mt-6">
+            What Makes It Different
+          </h3>
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Despite major top-down investments in immersive gaming - even <a href="https://finance.yahoo.com/news/gaming-become-next-revenue-pillar-183400667.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS8&guce_referrer_sig=AQAAAIBgHPh2eQdtarY5zCnOpMnB10Z0esCapd16lOpGgVe08x6vmCosBKQFuOa7M65nwX1ZJi9AoDz1-UqP5sTtP2AaOWJQaYlO8I2VHXHZT0sSLEE_R0KakbBI-jeUS0nGsWSLtDdOfUhC9vg2RFz3iZRCQRiOjG_TJaN6YXjnpEjp" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">billions from companies like Netflix</a> - <span className="font-semibold">player-generated, community-driven games are still rare.</span> That's what feels truly new.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            STEP 1: CONCEPTUALIZE YOUR GAME
+            A HUMBLE ASK
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Think about what makes your game unique. Consider these questions:
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            I'm humbled by how much I still don't know. I'm here to learn, to grow this concept thoughtfully, and to contribute something positive. If this resonates - I'd love to connect.
           </p>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>What's the core mechanic that drives gameplay?</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>How many players can participate?</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>How long does a typical game session last?</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>What are the rules and objectives?</span>
-            </li>
-          </ul>
-
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            STEP 2: SUBMIT YOUR IDEA
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Visit our Browse Games page and click "Submit Your Game" to access our community submission form. 
-            You'll need to share:
-          </p>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Game concept and unique selling points</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Target player count and demographics</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Estimated game duration</span>
-            </li>
-          </ul>
-
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            STEP 3: COMMUNITY REVIEW
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Our team reviews submissions and works with creators to refine mechanics and ensure games work 
-            within the Beacon platform framework. This collaborative process helps strengthen your concept.
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Thank you for reading this far. Truly.
           </p>
 
           <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            STEP 4: DEVELOPMENT & TESTING
+            P.S. THE THIRD DOOR
           </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Selected games move into development with support from our tech team. You'll work with us to:
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Sometimes you have to find the "third door" to get noticed, so I set up a Banksy-style display at the YC office. I couldn't resist taking a page from Apoorva Mehta's playbook - after all, <a href="https://techcrunch.com/2012/08/18/how-instacart-hacked-yc/" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">he once delivered a case of beer to Garry Tan to showcase Instacart</a>.
           </p>
-          <ul className="space-y-3 mb-4">
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Build out the digital components</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Test with focus groups</span>
-            </li>
-            <li className="flex gap-3 text-base text-zinc-300">
-              <span className="text-accent">•</span>
-              <span>Iterate based on feedback</span>
-            </li>
-          </ul>
-
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            STEP 5: LAUNCH!
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Once tested and refined, your game joins the Beacon Blockbusters library for franchisees to host 
-            with their communities. You'll see your creation come to life!
+          <p className="mb-4 text-base text-zinc-300 leading-relaxed">
+            Maybe don't try this at home, but do enjoy the video.
           </p>
-
-          <h2 className="arcade-title text-[0.8rem] sm:text-[0.9rem] text-primary mb-4 mt-6">
-            READY TO START?
-          </h2>
-          <p className="mb-4 text-base text-zinc-300">
-            Submit your idea today and join the arcade revolution! Together, we're building the future of 
-            community engagement games.
-          </p>
+          
+          {/* YouTube Short Embed */}
+          <div className="my-6 flex justify-center">
+            <div className="w-full max-w-md aspect-[9/16] bg-black border-2 border-zinc-700 overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/embed/-E_jStITXn0"
+                title="YouTube Short"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+          </div>
         </>
       )
     },
@@ -362,11 +359,8 @@ export default function BlogPost({ params }: BlogPostPageProps) {
                   {post.date}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-zinc-500" />
-                <span className="arcade-font text-[0.5rem] sm:text-[0.6rem] text-zinc-500">
-                  {post.author}
-                </span>
+              <div className="arcade-font text-[0.5rem] sm:text-[0.6rem] text-zinc-500">
+                by <a href="https://www.linkedin.com/in/pixasso" className="text-accent hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">Pixasso</a>
               </div>
             </div>
 

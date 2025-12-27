@@ -5,10 +5,10 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'The Beacon HQ',
+  title: 'The Beacon | Hyperlocal Live Gaming',
   description: 'Play live games like BORDERLAND and discover what\'s next in our arcade universe.',
   openGraph: {
-    title: 'The Beacon HQ - The Next-Gen Arcade',
+    title: 'The Beacon | Hyperlocal Live Gaming',
     description: 'Play live games like BORDERLAND and discover what\'s next in our arcade universe.',
     url: 'https://thebeaconhq.com',
     siteName: 'The Beacon HQ',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Beacon HQ - The Next-Gen Arcade',
+    title: 'The Beacon | Hyperlocal Live Gaming',
     description: 'Play live games like BORDERLAND and discover what\'s next in our arcade universe.',
     images: ['/images/og-image.png'],
   },

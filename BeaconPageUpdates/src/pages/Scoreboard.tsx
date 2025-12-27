@@ -1,15 +1,9 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { User } from 'lucide-react'
+import { Link } from "react-router-dom";
+import { User } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: 'The Beacon | Hyperlocal Live Gaming | Scoreboard',
-  description: 'View player stats and game history on The Beacon scoreboard.',
-}
-
-export default function Scoreboard() {
+export function Scoreboard() {
   // Mock player data - simplified to just players and games played
-  const players: { id: string; username: string; gamesPlayed: number }[] = []
+  const players: { id: string; username: string; gamesPlayed: number }[] = [];
 
   return (
     <main className="relative py-12 sm:py-16 md:py-20 lg:py-24 min-h-screen">
@@ -29,8 +23,11 @@ export default function Scoreboard() {
           <div className="bg-zinc-900 border-4 border-zinc-700 p-12 sm:p-16 text-center">
             <div className="space-y-6">
               <User className="w-16 h-16 text-zinc-700 mx-auto" />
+              <p className="arcade-font text-[0.7rem] sm:text-[0.8rem] text-zinc-500">
+                NO PLAYERS YET
+              </p>
               <p className="text-base text-zinc-400 max-w-md mx-auto">
-                Player stats and game history will appear here.
+                Be the first to play a Beacon Blockbuster game! Player stats and game history will appear here once games begin.
               </p>
             </div>
           </div>
@@ -64,7 +61,7 @@ export default function Scoreboard() {
                 {players.map((player) => (
                   <Link
                     key={player.id}
-                    href={`/player/${player.id}`}
+                    to={`/player/${player.id}`}
                     className="p-4 grid grid-cols-2 gap-4 items-center transition-all duration-300 hover:bg-zinc-800/50 hover:border-l-4 hover:border-l-accent group block"
                   >
                     {/* Player Name */}
@@ -96,6 +93,5 @@ export default function Scoreboard() {
         )}
       </div>
     </main>
-  )
+  );
 }
-
